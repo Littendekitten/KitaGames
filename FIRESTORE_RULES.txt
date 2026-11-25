@@ -1,0 +1,86 @@
+KITAGAMES — FIRESTORE SECURITY RULES
+====================================
+
+Copy the complete rules below into Firebase Console → Firestore Database →
+Rules, then click Publish. The app stores one private profile document at
+users/{userId}. A signed-in user can read or update only their own document.
+There are no public scoreboards or public user profiles.
+
+----- COPY FROM THE NEXT LINE INTO FIRESTORE RULES -----
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isOwner(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    function validProfile(data) {
+      return data.keys().hasOnly([
+          'favorites',
+          'bests',
+          'playedCount',
+          'createdAt',
+          'updatedAt',
+          'displayName',
+          'email'
+        ])
+        && data.keys().hasAll([
+          'favorites',
+          'bests',
+          'playedCount',
+          'createdAt',
+          'updatedAt'
+        ])
+        && data.favorites is list
+        && data.favorites.size() <= 100
+        && data.bests is map
+        && data.bests.size() <= 100
+        && data.playedCount is int
+        && data.playedCount >= 0
+        && data.createdAt is timestamp
+        && data.updatedAt is timestamp
+        && (!('displayName' in data)
+            || (data.displayName is string && data.displayName.size() <= 80))
+        && (!('email' in data)
+            || (data.email is string && data.email.size() <= 254));
+    }
+
+    match /users/{userId} {
+      allow read: if isOwner(userId);
+
+      allow create: if isOwner(userId)
+        && validProfile(request.resource.data)
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time;
+
+      allow update: if isOwner(userId)
+        && validProfile(request.resource.data)
+        && request.resource.data.createdAt == resource.data.createdAt
+        && request.resource.data.updatedAt == request.time;
+
+      // Profile removal is intentionally not exposed in the site UI.
+      allow delete: if false;
+    }
+
+    // Everything not explicitly permitted above is private by default.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+
+----- END OF COPY -----
+
+SECURITY NOTES
+--------------
+- These rules require Firebase Authentication for every profile read/write.
+- A user may access only users/{their own Firebase Auth UID}.
+- Anonymous/guest users can save their own profile too. Guest saves are tied
+  to that anonymous Firebase account and can be lost when browser/site data is
+  cleared. The app offers a way to link the guest account to Google.
+- Do not replace these rules with allow read, write: if true.
+- Never put a Firebase Admin SDK service-account key in this static website.
+- Firebase web config and its API key are client identifiers, not database
+  passwords. Firestore Security Rules and Authentication protect the data.

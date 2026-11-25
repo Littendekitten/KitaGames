@@ -1,0 +1,224 @@
+KITAGAMES — FULL GAME RULES
+===========================
+
+Welcome to KitaGames. These are the rules and controls for every activity in
+this site. All games are free to play in the browser. You can play at your own
+pace. The Chill and Cozy activities have no timers, scoreboards, or win
+conditions unless a description explicitly says otherwise.
+
+GENERAL SITE RULES
+------------------
+1. Choose a game card to open it. Use “All games” to return to the library.
+2. Use the search field to find a game by name or category.
+3. Use the category chips to filter the library. “Favorites” shows games you
+   have saved with the heart button.
+4. Use “Restart” to restart the current game. Use “Fullscreen” or press F to
+   expand the game area. Press Escape or the fullscreen button to leave it.
+5. Your personal bests and favorites are saved on this browser. Sign in with
+   Google or email to sync those saves through your KitaGames Firebase profile.
+   Guest accounts also work, but a guest save is tied to that Firebase guest
+   account and the browser/device where it was created unless you link it to a
+   permanent Google or email sign-in.
+6. High scores are personal records, not prizes. There is no requirement to
+   compete, beat another player, or chase a score.
+7. Some games use the keyboard; others work with a mouse, touch screen, or both.
+   On touch devices, tap the on-screen board or canvas.
+
+ARCADE, PUZZLE, MEMORY, STRATEGY AND SKILL GAMES
+-----------------------------------------------
+
+1. NEON SNAKE
+Objective: Eat the glowing fruit, grow longer, and avoid crashing.
+Controls: Arrow keys or W/A/S/D.
+Rules: Each fruit makes the snake longer. The game ends if the snake hits a
+wall or runs into its own body. Try to plan turns before the snake reaches them.
+
+2. 2048
+Objective: Combine numbered tiles until you create a 2048 tile.
+Controls: Arrow keys; on touch screens, swipe in the direction you want to move.
+Rules: Every move slides all tiles. Matching values combine into their sum.
+After a valid move, a new tile appears. The game ends when no legal move remains.
+Keep your largest tile near a corner to make the board easier to manage.
+
+3. TIC TAC TOE
+Objective: Make a line of three of your marks.
+Controls: Click or tap an empty square.
+Rules: Players alternate X and O on a 3×3 board. The first player to make a
+horizontal, vertical, or diagonal line of three wins. A full board with no line
+is a draw. Choose the computer opponent or take turns with another person as
+provided by the in-game controls.
+
+4. MEMORY MATCH
+Objective: Find all matching pairs of cards.
+Controls: Click or tap two cards to reveal them.
+Rules: Only two cards can be face-up at once. If they match, they stay revealed.
+If they do not match, they turn face-down again. Continue until every pair is
+matched. The move count records how many pairs of cards you turned over.
+
+5. MINEFIELD
+Objective: Reveal every safe square without revealing a mine.
+Controls: Click/tap to reveal. Right-click or long-press to flag a suspected mine.
+Rules: A number tells you how many mines touch that square, including diagonals.
+Use those clues to work out where mines are located. Revealing a mine ends the
+round. Flagging is a note to yourself; it does not remove a mine.
+
+6. BRICK BREAKER
+Objective: Clear the bricks by bouncing a ball into them.
+Controls: Move the paddle with the mouse, touch, or Left/Right arrow keys.
+Rules: Keep the ball above the bottom edge using the paddle. Each collision
+with a brick removes that brick. Clear the full layout to finish the round.
+You have three lives; losing the ball costs one life.
+
+7. POCKET PONG
+Objective: Keep the rally going and reach five points before the computer.
+Controls: Move your paddle with the mouse, touch, or W/S keys.
+Rules: Return the ball to the other side. Score when the opponent misses.
+The computer becomes quicker as a rally develops. The first player to five
+points wins the match.
+
+8. FLAPPY ROCKET
+Objective: Fly through the gaps without touching an obstacle.
+Controls: Space, click, or tap to flap upward.
+Rules: Each flap lifts the rocket. Gravity pulls it down between flaps.
+Pass through gaps to continue. A collision ends the run; try again to improve
+your personal best.
+
+9. BLOCK DROP
+Objective: Clear horizontal lines and keep the stack from reaching the top.
+Controls: Left/Right arrows move; Up arrow rotates; Down arrow soft-drops;
+Space hard-drops the current block.
+Rules: Blocks fall into the playfield. Complete a full horizontal line to clear
+it. Cleared lines create room and add to your line total. The game ends when a
+new block cannot enter the board.
+
+10. SIMON SAYS
+Objective: Repeat the growing sequence of colored pads.
+Controls: Click or tap the colored pads in the sequence shown.
+Rules: Watch the sequence, then repeat it in exactly the same order. Each
+successful round adds one more color to remember. One incorrect choice ends
+the sequence. Restart to try a new pattern.
+
+11. WHACK-A-MOLE
+Objective: Tap the moles as they pop up.
+Controls: Click or tap a mole while it is visible.
+Rules: The activity lasts 30 seconds. Each successful hit adds one to the hit
+count. Moles appear in changing places, so watch the whole garden.
+
+12. REACTION TIME
+Objective: Measure how quickly you react to the green signal.
+Controls: Press Start, wait for the panel to turn green, then click or tap it.
+Rules: Do not click early. An early click is a false start and you must begin
+that attempt again. The game measures the time between the green signal and
+your click. The best result from the set is saved as your personal best.
+
+13. AIM TRAINER
+Objective: Hit as many moving targets as possible.
+Controls: Click or tap the target.
+Rules: The round lasts 30 seconds. A successful hit adds one to your total and
+moves the target to a new position. Keep your pointer ready and make small,
+accurate movements.
+
+14. WORD GUESS
+Objective: Guess the hidden five-letter word in six attempts.
+Controls: Type a five-letter word into the field and press Enter or Submit.
+Rules: Green means the letter is correct and in the right place. Gold means the
+letter is in the word but in a different place. Gray means the letter is not
+in the hidden word. You have six guesses to solve the word.
+
+15. CONNECT FOUR
+Objective: Connect four discs in a row before the other player.
+Controls: Click or tap the column where you want to drop a disc.
+Rules: Two players take turns. Discs fall to the lowest empty space in the
+selected column. Connect four horizontally, vertically, or diagonally to win.
+A full board without a four-in-a-row is a draw.
+
+16. ROCK PAPER SCISSORS
+Objective: Win three rounds before the computer opponent.
+Controls: Choose Rock, Paper, or Scissors.
+Rules: Rock beats Scissors. Scissors beats Paper. Paper beats Rock. Matching
+choices are a draw and do not give either player a point. First to three round
+wins takes the match.
+
+17. LIGHTS OUT
+Objective: Turn every light off.
+Controls: Click or tap a light.
+Rules: Selecting one light toggles it and its horizontal and vertical neighbors.
+A light that is on becomes off; a light that is off becomes on. Continue until
+all lights are off. The move counter records each selected light.
+
+18. SLIDE PUZZLE
+Objective: Arrange the numbered tiles from 1 to 15 with the empty space last.
+Controls: Click or tap a tile next to the empty space.
+Rules: Only a tile directly above, below, left, or right of the empty square can
+slide into it. Diagonal moves are not allowed. Arrange the numbers in order.
+
+19. MATH SPRINT
+Objective: Solve as many arithmetic questions as possible in 30 seconds.
+Controls: Type the answer and press Enter or Submit.
+Rules: Questions include addition, subtraction, and multiplication. Each
+correct answer adds one to the count and brings up another question. The timer
+ends the round after 30 seconds.
+
+20. TYPE DASH
+Objective: Type the displayed sentence accurately and comfortably.
+Controls: Type into the text field. The timer begins with your first keystroke.
+Rules: Complete the sentence exactly as shown. The activity calculates words
+per minute and accuracy. Correctness matters; there is no need to rush.
+
+CHILL, COZY AND CREATIVE ACTIVITIES
+-----------------------------------
+These activities are deliberately non-competitive. There are no timers, no
+leaderboards, no score requirements, and no losing state. Use them as long as
+you like.
+
+21. CLOUD DRIFT
+Objective: Make your own peaceful sky.
+Controls: Tap/click the sky to add a cloud. Drag a cloud to move it. Use “Add a
+cloud” to create one elsewhere, or “Clear sky” to remove all clouds.
+Rules: Clouds drift gently on their own. There is no target or finish line.
+
+22. TINY GARDEN
+Objective: Plant a pocket garden and help it grow.
+Controls: Select a seed type, then tap an empty plot. Press “Water the garden”
+to grow every planted seed. Use “Start a fresh patch” to clear the plots.
+Rules: You can mix any flowers and herbs. Watering moves a planted seed through
+its growth stages. There is no ideal layout and no limit on how long you play.
+
+23. KOI POND
+Objective: Enjoy the pond and interact with the koi.
+Controls: Tap/click anywhere in the pond to sprinkle food at that spot. Use
+“Sprinkle food” to feed the center, and “Pause fish” to pause their movement.
+Rules: The fish swim calmly and turn toward food ripples. This is an ambient
+activity, not a fishing or score game.
+
+24. RAINY WINDOW
+Objective: Set the mood in a cozy rainy room.
+Controls: Move the Rain slider to adjust rainfall. Press the light button to
+switch between afternoon and evening.
+Rules: Watch the rain on the window and adjust the atmosphere. There is no
+objective, timer, score, or failure state.
+
+25. STARGAZER
+Objective: Connect the stars to make a constellation.
+Controls: Choose Little Dipper, Swan, or Star Heart. Tap the glowing stars in
+the order requested. “Clear lines” resets the current pattern.
+Rules: Find each star in sequence. When all points are connected, the pattern
+is complete. You can switch to another constellation or repeat one at any time.
+
+26. COLOR STUDIO
+Objective: Draw, doodle, and experiment with color.
+Controls: Draw on the canvas with a mouse, finger, or stylus. Select a color,
+adjust the Brush slider, choose Eraser, or press Clear canvas.
+Rules: The canvas is your own blank space. Make anything you like and change
+it whenever you like. There is no objective or score.
+
+ACCESSIBILITY AND FAIR PLAY
+---------------------------
+- Take breaks whenever you need them.
+- Keyboard, mouse, and touch controls are supported where practical.
+- Do not use the site to upload or share personal or private information; the
+  drawing canvas stays in your browser and is not uploaded to Firestore.
+- Your account data is private to your Firebase user ID. Never share your
+  password with anyone.
+- The site is a collection of small casual activities. Scores are stored as
+  personal records only; no public ranking or competition is required.
