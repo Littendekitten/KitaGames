@@ -1,88 +1,108 @@
 KITAGAMES — FIREBASE SETUP (NO COMMANDS)
 ========================================
 
-The site is already connected to the Firebase web app configuration supplied
-for project: kitagames (project ID: kitagames). You do not need to edit code or
-run commands. Complete the console setup below once to turn on sign-in and
-cloud saves.
+The site already contains the Firebase web configuration for project
+"kitagames". The community creator stores each HTML game directly in Cloud
+Firestore. No custom server, backend, Firebase Storage or Cloud Functions are
+required.
 
-1) ENABLE THE SIGN-IN METHODS
------------------------------
-1. Open https://console.firebase.google.com/
-2. Select the kitagames project.
-3. Open Build → Authentication.
-4. Click Get started if Authentication has not been enabled yet.
-5. Open the Sign-in method (or Sign-in providers) tab.
-6. Enable Google. Choose a support email if Firebase asks for one, then Save.
-7. Enable Email/Password, then Save.
-8. Enable Anonymous, then Save. This powers “Continue as guest”.
+1) ENABLE SIGN-IN PROVIDERS
+---------------------------
+1. Open https://console.firebase.google.com/ and select the kitagames project.
+2. Open Build → Authentication → Get started (if needed).
+3. Enable Google and choose a support email if asked.
+4. Enable Email/Password.
+5. Enable Anonymous if you want visitors to use guest play.
 
 2) AUTHORIZE YOUR GITHUB PAGES DOMAIN
 -------------------------------------
 1. In Authentication, open Settings → Authorized domains.
-2. Add your GitHub Pages host, exactly in this form:
+2. Add your GitHub Pages hostname, for example:
       YOUR-GITHUB-USERNAME.github.io
    Do not include https://, a repository path, or a trailing slash.
-3. If you use a custom domain later, add that hostname too.
+3. Add your custom domain too if you use one later.
 
-3) CREATE FIRESTORE DATABASE
------------------------------
-1. In the Firebase console, open Build → Firestore Database.
-2. Click Create database.
-3. Choose Production mode if asked. Do not select test mode for a public site.
-4. Choose the database region carefully. Firestore database location is not
-   something you should casually change after creation.
-5. Finish creating the database.
+3) CREATE FIRESTORE
+-------------------
+1. Open Build → Firestore Database.
+2. Click Create database and choose Production mode.
+3. Choose a database region and finish creating the database.
 
-4) PUBLISH THE PRIVATE PROFILE RULES
-------------------------------------
+4) PUBLISH THE FIRESTORE SECURITY RULES
+----------------------------------------
 1. Open Firestore Database → Rules.
 2. Open FIRESTORE_RULES.txt from this website folder.
-3. Copy the full rules between the “COPY” markers.
-4. Paste them into the Firebase Rules editor.
-5. Click Publish.
-6. Do not use public read/write rules. The included rules let each account
-   read/write only its own users/{uid} profile document.
+3. Copy the full rules between the COPY markers into the Rules editor.
+4. Click Publish.
+5. These combined rules keep account profiles private, allow anyone to read
+   only published community games, let each owner read their private drafts,
+   and enforce exactly three reusable game slots per account. Do not replace
+   them with public read/write rules.
 
-5) UPLOAD THE WEBSITE TO GITHUB PAGES
+5) CREATE THE COMMUNITY QUERY INDEX (IF FIRESTORE ASKS FOR IT)
+--------------------------------------------------------------
+The public Community shelf uses a Firestore collection-group query on
+communityGames, filtered by published == true. If the browser displays a
+Firestore "requires an index" error, use the link in that error or follow
+FIRESTORE_INDEXES.txt to add the single-field collection-group index.
+
+6) USE THE COMMUNITY CREATOR
+----------------------------
+1. Open the published KitaGames site.
+2. Sign in with Google or email/password. Guest accounts can play but cannot
+   create or publish games.
+3. Scroll to Community → Make a game.
+4. Enter a title and short description.
+5. Paste a complete self-contained HTML game, or upload one .html/.htm file.
+6. Preview the game. Choose whether to keep it private or publish it.
+7. Save it to Firestore. Each account has three slots; edit a saved game or
+   delete one to free a slot.
+
+7) UPLOAD THE WEBSITE TO GITHUB PAGES
 -------------------------------------
 1. Extract KitaGames-GitHub-Pages.zip on your computer.
-2. Open your GitHub repository in the browser.
-3. Use Add file → Upload files.
-4. Upload every file and folder from the extracted kitagames folder. Keep the
-   assets folder in the same place as index.html. Do not upload only index.html.
-5. Commit the upload to the main branch.
-6. Open Settings → Pages. Choose Deploy from a branch, branch main, folder
+2. Open your GitHub repository in the browser and choose Add file → Upload files.
+3. Upload every file and folder from the extracted kitagames folder. Keep the
+   assets folder beside index.html. Do not upload only index.html.
+4. Commit the upload to the main branch.
+5. Open Settings → Pages. Choose Deploy from a branch, branch main, folder
    /(root), then Save.
-7. Wait for GitHub Pages to publish. The website address appears in Settings
-   → Pages.
 
-6) CHECK SIGN-IN AND SAVES
+8) CHECK SIGN-IN AND SAVES
 --------------------------
-1. Visit your published GitHub Pages site using its https:// address.
-2. Click Sign in.
-3. Try Continue as guest first. A guest profile should be created in Firebase
-   Authentication and its private profile should appear in Firestore under
-   users/{the guest UID}.
-4. Add a favorite or finish a game to create a personal best. Refresh the page
-   and check that the data remains.
-5. Open Sign in again and link the guest save to Google, or create an email and
-   password account. Google/email sign-in can be used on another device to
-   retrieve the same cloud profile.
+1. Visit your site using its https:// GitHub Pages address.
+2. Test Google/email sign-in and guest play.
+3. Add a favorite or finish a game, refresh, and confirm the private profile
+   syncs in Firestore under users/{your-auth-uid}.
+4. Sign in with Google/email, publish a small test game, then open the site in
+   a signed-out browser window to confirm it appears in Community.
+5. Try creating a fourth game: the site should stop you, and Firestore Rules
+   independently reject any attempt to write a fourth slot.
+
+COMMUNITY GAME FORMAT
+---------------------
+- One .html/.htm file per game, or paste a complete self-contained HTML page.
+- Maximum 80,000 characters per game.
+- Inline HTML/CSS/JavaScript is supported. Small images may be embedded as
+  data URLs. External scripts/resources and network APIs are blocked by the
+  game Content Security Policy; popups and top-level redirects are disabled
+  by the iframe sandbox. A sandbox is not a full malware scanner.
+- Private drafts are visible only to their owner. Published games are public.
+- HTML source is stored in Firestore documents, not Firebase Storage.
+- The three-slot cap is enforced by fixed document IDs in Firestore Rules,
+  not just by a counter in the website.
 
 IMPORTANT DETAILS
 -----------------
-- The Firebase JavaScript SDK is loaded directly from Google's CDN. No build
-  tool, terminal, npm, or local server is required.
-- The app uses Firebase Authentication and Cloud Firestore. Analytics is not
-  initialized; the measurement ID is retained in the config only.
-- The Firebase web API key in index.html is expected to be visible in a web
-  app. It is not a private key. Keep Firestore locked down with the supplied
-  security rules and never add service-account credentials to this folder.
-- Guest accounts are anonymous Firebase accounts. They are useful for casual
-  play, but linking the guest account to Google is the safest way to keep the
-  save if you later switch browsers/devices or clear local site data.
-- If Google sign-in reports “unauthorized domain”, repeat step 2 and ensure
-  you added only the hostname shown in the address bar.
-- If sign-in works but cloud saves do not, check that Firestore exists and the
-  latest FIRESTORE_RULES.txt rules have been Published.
+- Firestore is a hosted service and normal Firebase quotas/pricing can apply
+  for reads, writes, stored data and data transfer. No custom backend does not
+  mean unlimited usage or guaranteed zero cost. Review Firebase usage and set
+  budget alerts in Google Cloud if appropriate.
+- The Firebase JavaScript SDK loads directly from Google's CDN. No terminal,
+  npm, build tool or command-line setup is required.
+- The Firebase web API key in index.html is a public client identifier, not a
+  private key. Never add a Firebase Admin service-account key to this site.
+- Guest accounts use anonymous Firebase Auth. Link a guest to Google or switch
+  to a permanent Google/email account before using the creator.
+- Analytics is not initialized in this build; the measurement ID remains in
+  the Firebase config only.

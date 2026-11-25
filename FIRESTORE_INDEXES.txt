@@ -1,0 +1,25 @@
+KITAGAMES — FIRESTORE INDEX NOTES
+=================================
+
+The public community shelf queries every users/{uid}/communityGames collection
+as a collection group and filters published == true.
+
+If Firebase reports "The query requires an index":
+
+1. Open the index-creation link shown in the browser console/error message.
+   Firebase pre-fills the correct collection-group index in that link.
+2. Check that the Collection ID is communityGames.
+3. Set Query scope to Collection group.
+4. Add the field published in Ascending order.
+5. Create the index and wait until Firebase shows it as Enabled.
+6. Refresh KitaGames.
+
+If creating the index manually instead of using Firebase's link, create the
+single-field collection-group index described above. No composite index or
+index for the HTML code field is required by the app's public query.
+
+Optional cost/index-size cleanup:
+- In Firestore → Indexes → Single field, add an index exemption for the code
+  field under the communityGames collection group. The app never queries or
+  sorts by code; it only reads/writes the source. Keep the published field
+  indexed because the public library filters on it.

@@ -1,0 +1,52 @@
+KITAGAMES COMMUNITY CREATOR — RULES FOR UPLOADED GAMES
+=======================================================
+
+ACCOUNT RULES
+------------
+1. You must be signed in with Google or email/password to create, save, edit,
+   or publish community games. Guest accounts can play games but cannot publish.
+2. Each account gets three game slots: game-1, game-2 and game-3.
+3. A slot can contain one game. Editing a game does not use another slot.
+4. Delete a game to free its slot for a replacement. There is no fourth slot.
+5. You choose whether a saved game is a private draft or public.
+6. Public games can be played by anyone who visits KitaGames. Private drafts
+   are visible only to the account that created them.
+
+FILE AND CODE RULES
+-------------------
+1. Upload one .html or .htm file, or paste a complete self-contained HTML game.
+2. The maximum source length is 80,000 characters per game.
+3. HTML, inline CSS and inline JavaScript are supported.
+4. Add small images as data URLs inside your HTML if needed.
+5. External JavaScript, external stylesheets, network requests, embedded
+   frames, forms, objects, plug-ins and outbound connections are blocked when
+   a community game is previewed or played.
+6. Games must work without a server, build step, package manager or external API.
+7. Do not include passwords, API secrets, private data or personal information.
+
+SAFETY AND COMMUNITY
+--------------------
+1. Community games are player-created and are not official KitaGames games.
+2. Do not upload malware, deceptive content, harassment, hate, explicit sexual
+   content, violent threats, scams, or content that violates other people's
+   rights.
+3. Do not impersonate another creator or use artwork/code without permission.
+4. The sandbox separates the game from the main site and blocks network access,
+   but users should still inspect unfamiliar game content and report abuse.
+5. Publishing makes the game's title, description, creator display name and
+   HTML source publicly readable in Firestore. Do not include private details.
+
+PLAY CONTROLS
+-------------
+- Use the controls provided inside each player-created game.
+- Use KitaGames' Fullscreen button or press F to fullscreen the game area.
+- Press Escape to leave fullscreen.
+- Use Back to return to the game library.
+
+DATA AND STORAGE
+----------------
+- Game HTML is stored directly in Cloud Firestore; Firebase Storage is not used.
+- Deleting a game removes its Firestore game document and frees the slot.
+- Firestore Security Rules, not a browser-only counter, enforce slot ownership
+  and the three-game maximum.
+- The site has no separate server or custom backend.

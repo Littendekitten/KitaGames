@@ -40,6 +40,8 @@ Add your GitHub Pages host (for example `yourname.github.io`) to Authentication 
 - `RULES.txt` — full instructions and rules for all 26 games/activities.
 - `FIREBASE_SETUP.txt` — click-by-click Firebase and GitHub Pages setup.
 - `FIRESTORE_RULES.txt` — complete Firestore Security Rules to paste into Firebase.
+- `COMMUNITY_GAME_RULES.txt` — account limits, upload format, safety and publishing rules for player-made games.
+- `FIRESTORE_INDEXES.txt` — collection-group index setup if Firebase requests it.
 
 ## Technical notes
 
@@ -48,3 +50,21 @@ Add your GitHub Pages host (for example `yourname.github.io`) to Authentication 
 - No Firebase Admin credentials are included. The browser config is public by design; Firestore authorization is enforced by Security Rules.
 - Game artwork is bundled locally in `assets/`, so the covers do not depend on third-party image hosts.
 - Guest saves remain tied to the anonymous Firebase account. The site supports linking a guest account to Google so the same UID/profile can be retained.
+
+
+## Community games (player uploads)
+
+KitaGames includes a community creator. A user signed in with Google or email
+can paste a self-contained HTML game or upload one `.html` file, preview it in
+a sandbox, and save it directly to Cloud Firestore. Users can have up to three
+game documents in fixed reusable slots; this is enforced by Firestore Rules.
+Guest accounts can play but cannot publish. Games can be private drafts or
+publicly published.
+
+No custom backend, Firebase Storage, Cloud Functions, or command-line tooling
+is required. Game source is stored in Firestore, limited to 80,000 characters,
+and played inside an isolated iframe with a restrictive Content Security
+Policy. Publish the updated `FIRESTORE_RULES.txt` in the Firebase Console
+before using the community creator.
+
+See `FIREBASE_SETUP.txt` for no-command Firebase setup, `COMMUNITY_GAME_RULES.txt` for uploader rules, and `FIRESTORE_INDEXES.txt` if the Community query asks for a Firestore index. Firestore usage is still subject to Google Firebase quotas and pricing for reads, writes, stored data and network transfer; a no-server design does not mean unlimited or necessarily free usage.

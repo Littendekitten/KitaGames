@@ -1,10 +1,10 @@
 KITAGAMES — FIRESTORE SECURITY RULES
 ====================================
 
-Copy the complete rules below into Firebase Console → Firestore Database →
-Rules, then click Publish. The app stores one private profile document at
-users/{userId}. A signed-in user can read or update only their own document.
-There are no public scoreboards or public user profiles.
+Paste the complete rules below into Firebase Console → Firestore Database →
+Rules, then click Publish. These rules protect private account saves and the
+player-made game library. No server, Cloud Functions, Firebase Storage or
+Admin SDK is used.
 
 ----- COPY FROM THE NEXT LINE INTO FIRESTORE RULES -----
 
@@ -12,26 +12,24 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    function isOwner(userId) {
+    function signedIn(userId) {
       return request.auth != null && request.auth.uid == userId;
+    }
+
+    // Guest/anonymous sessions may play and save personal game progress,
+    // but only a real Google/email account may create community games.
+    function realAccount(userId) {
+      return signedIn(userId)
+        && request.auth.token.firebase.sign_in_provider != 'anonymous';
     }
 
     function validProfile(data) {
       return data.keys().hasOnly([
-          'favorites',
-          'bests',
-          'playedCount',
-          'createdAt',
-          'updatedAt',
-          'displayName',
-          'email'
+          'favorites', 'bests', 'playedCount', 'createdAt', 'updatedAt',
+          'displayName', 'email'
         ])
         && data.keys().hasAll([
-          'favorites',
-          'bests',
-          'playedCount',
-          'createdAt',
-          'updatedAt'
+          'favorites', 'bests', 'playedCount', 'createdAt', 'updatedAt'
         ])
         && data.favorites is list
         && data.favorites.size() <= 100
@@ -47,21 +45,84 @@ service cloud.firestore {
             || (data.email is string && data.email.size() <= 254));
     }
 
-    match /users/{userId} {
-      allow read: if isOwner(userId);
+    function validGameSlot(gameId) {
+      return gameId in ['game-1', 'game-2', 'game-3'];
+    }
 
-      allow create: if isOwner(userId)
+    function validCommunityGame(data, userId) {
+      return data.keys().hasOnly([
+          'title', 'description', 'code', 'published', 'ownerUid',
+          'ownerName', 'createdAt', 'updatedAt', 'publishedAt'
+        ])
+        && data.keys().hasAll([
+          'title', 'description', 'code', 'published', 'ownerUid',
+          'ownerName', 'createdAt', 'updatedAt', 'publishedAt'
+        ])
+        && data.title is string
+        && data.title.size() >= 1
+        && data.title.size() <= 40
+        && data.description is string
+        && data.description.size() <= 140
+        && data.code is string
+        && data.code.size() >= 1
+        && data.code.size() <= 80000
+        && data.published is bool
+        && data.ownerUid == userId
+        && data.ownerName is string
+        && data.ownerName.size() <= 60
+        && data.createdAt is timestamp
+        && data.updatedAt is timestamp
+        && (data.publishedAt == null || data.publishedAt is timestamp)
+        && (!data.published || data.publishedAt is timestamp);
+    }
+
+    match /users/{userId} {
+      allow read: if signedIn(userId);
+
+      allow create: if signedIn(userId)
         && validProfile(request.resource.data)
         && request.resource.data.createdAt == request.time
         && request.resource.data.updatedAt == request.time;
 
-      allow update: if isOwner(userId)
+      allow update: if signedIn(userId)
         && validProfile(request.resource.data)
         && request.resource.data.createdAt == resource.data.createdAt
         && request.resource.data.updatedAt == request.time;
 
-      // Profile removal is intentionally not exposed in the site UI.
       allow delete: if false;
+
+      // Exactly three possible document IDs means an account can own no more
+      // than three community-game documents. Deleting a slot makes it reusable.
+      match /communityGames/{gameId} {
+        allow read: if signedIn(userId) || resource.data.published == true;
+
+        allow create: if realAccount(userId)
+          && validGameSlot(gameId)
+          && validCommunityGame(request.resource.data, userId)
+          && request.resource.data.createdAt == request.time
+          && request.resource.data.updatedAt == request.time;
+
+        allow update: if realAccount(userId)
+          && validGameSlot(gameId)
+          && resource.data.ownerUid == userId
+          && validCommunityGame(request.resource.data, userId)
+          && request.resource.data.ownerUid == resource.data.ownerUid
+          && request.resource.data.createdAt == resource.data.createdAt
+          && request.resource.data.updatedAt == request.time;
+
+        allow delete: if realAccount(userId)
+          && validGameSlot(gameId)
+          && resource.data.ownerUid == userId;
+      }
+    }
+
+    // Required for collectionGroup('communityGames') public-library queries.
+    // The client must query with where('published', '==', true).
+    match /{path=**}/communityGames/{gameId} {
+      allow get: if resource.data.published == true;
+      allow list: if resource.data.published == true
+        && request.query.limit != null
+        && request.query.limit <= 100;
     }
 
     // Everything not explicitly permitted above is private by default.
@@ -73,14 +134,31 @@ service cloud.firestore {
 
 ----- END OF COPY -----
 
-SECURITY NOTES
---------------
-- These rules require Firebase Authentication for every profile read/write.
-- A user may access only users/{their own Firebase Auth UID}.
-- Anonymous/guest users can save their own profile too. Guest saves are tied
-  to that anonymous Firebase account and can be lost when browser/site data is
-  cleared. The app offers a way to link the guest account to Google.
-- Do not replace these rules with allow read, write: if true.
-- Never put a Firebase Admin SDK service-account key in this static website.
-- Firebase web config and its API key are client identifiers, not database
-  passwords. Firestore Security Rules and Authentication protect the data.
+SECURITY AND LIMIT NOTES
+------------------------
+- The application writes each creator's games to:
+    users/{their-auth-uid}/communityGames/game-1
+    users/{their-auth-uid}/communityGames/game-2
+    users/{their-auth-uid}/communityGames/game-3
+  These are the only permitted game document IDs. Rules reject a fourth slot.
+- Users may create, edit, publish, unpublish and delete only their own game slots.
+- A Google/email account can publish. Anonymous/guest sessions cannot publish.
+- Published games are publicly readable; private drafts are readable only by
+  their owner. Public collection-group queries must filter published == true.
+- Each HTML source is limited to 80,000 characters. The site also checks this
+  before saving. Firestore rules repeat the limit so it cannot be bypassed by
+  editing requests in the browser.
+- Game HTML is stored directly in Firestore. No Cloud Storage, custom API,
+  server, Cloud Functions or other backend is used. Each game is a document.
+- Every uploaded game is played in an iframe with sandbox="allow-scripts" and
+  a restrictive Content Security Policy. The game has no same-origin access,
+  no access to the KitaGames DOM/storage/auth. The content policy blocks
+  external subresources and network APIs, while the iframe sandbox blocks
+  popups and top-level navigation. Inline JS/CSS and data-URL images are
+  supported; nested frames, forms and object embeds are removed/blocked. A
+  sandbox is not a malware scanner or content moderator, and browser-level
+  navigation within the embedded frame cannot be fully disabled while scripts
+  are enabled. Treat unfamiliar submissions with care.
+- The app displays creator display names, not email addresses.
+- Never use allow read, write: if true. Never put a Firebase Admin SDK
+  service-account key in this website.
