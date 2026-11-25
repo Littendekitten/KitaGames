@@ -1,0 +1,55 @@
+NEON DISTRICT: OPEN CITY — PLAYER GUIDE
+=======================================
+
+WHAT THIS IS
+------------
+Neon District is an original, top-down open-world city sandbox made for
+KitaGames. It is a small arcade-style city adventure, not a 3D recreation of
+any existing game. The city is generated in Canvas and all play runs locally
+in your browser.
+
+CONTROLS
+--------
+WASD or Arrow Keys : Walk on foot / steer and drive a car
+E                   : Enter or exit a parked car; accept a job; deliver a job
+Shift               : Sprint on foot / boost while driving
+Space               : Handbrake while driving
+P                   : Pause or resume
+F                   : Fullscreen (same as the KitaGames fullscreen button)
+Touch controls     : On-screen D-pad, Boost, Use and Brake buttons
+
+GETTING STARTED
+---------------
+1. Look at the minimap in the top-right corner. The green marker is the next
+   job contact; the pink marker is the delivery drop after you accept a job.
+2. Walk or drive to the green marker. Get close and press E / USE.
+3. Follow the pink marker to the destination and press E / USE to finish.
+4. Earn cash for each completed delivery. Jobs rotate through the city.
+5. Look for parked cars. Get close and press E to borrow a ride. This raises
+   your wanted level, so expect a police chase.
+6. Find the blue GARAGE marker and press E while close to repair your car for
+   $75. You must be in a vehicle to use garage repairs.
+7. Collect small yellow cash bundles as you explore. The minimap shows your
+   position, the active job, parked cars and police pursuit markers.
+
+WANTED LEVEL
+------------
+Borrowing a parked vehicle attracts attention. Driving extremely fast can
+also draw police attention. Police vehicles pursue you. Break away and stay
+out of their nearby search area; after a while, wanted stars cool down. If
+your health reaches zero, you are picked up, pay a $150 bail fee, and return
+to downtown.
+
+SAVE DATA
+---------
+Cash and completed jobs are saved in this browser's local storage. This is
+not a server save and will not automatically follow you to another device.
+Clearing site data can remove this local progress.
+
+NOTES
+-----
+- This is an original 2D top-down city game designed to be playable in a web
+  page without commands, downloads or a custom backend.
+- The minimap shows the street grid, your position, and the next job marker.
+- The game can be restarted with KitaGames' Restart button.
+- On small screens use the on-screen controls; fullscreen gives more room.

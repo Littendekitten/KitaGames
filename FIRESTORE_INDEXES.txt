@@ -1,25 +1,27 @@
 KITAGAMES — FIRESTORE INDEX NOTES
 =================================
 
-The public community shelf queries every users/{uid}/communityGames collection
-as a collection group and filters published == true.
+The updated KitaGames build no longer uses collectionGroup('communityGames').
+It reads from one top-level collection:
 
-If Firebase reports "The query requires an index":
+  /communityGames/{uid}__game-1
+  /communityGames/{uid}__game-2
+  /communityGames/{uid}__game-3
 
-1. Open the index-creation link shown in the browser console/error message.
-   Firebase pre-fills the correct collection-group index in that link.
-2. Check that the Collection ID is communityGames.
-3. Set Query scope to Collection group.
-4. Add the field published in Ascending order.
-5. Create the index and wait until Firebase shows it as Enabled.
-6. Refresh KitaGames.
+The public library query is a normal collection query with one equality filter:
 
-If creating the index manually instead of using Firebase's link, create the
-single-field collection-group index described above. No composite index or
-index for the HTML code field is required by the app's public query.
+  collection(db, 'communityGames')
+  where('published', '==', true)
+  limit(100)
 
-Optional cost/index-size cleanup:
-- In Firestore → Indexes → Single field, add an index exemption for the code
-  field under the communityGames collection group. The app never queries or
-  sorts by code; it only reads/writes the source. Keep the published field
-  indexed because the public library filters on it.
+Firestore Standard automatically maintains collection-scope single-field indexes
+for ordinary equality queries. The 'published == true' filter uses that default
+index. No collection-group index, composite index, index link, CLI command or
+manual index creation is required.
+
+If Firestore still shows an index error after uploading the new website, first
+confirm that the new index.html has replaced the old one (search it for
+"collectionGroup" — it should not appear). Then open Firestore → Indexes →
+Single-field and confirm that indexing for 'published' on the communityGames
+collection has not been disabled. The website no longer queries the legacy
+users/{uid}/communityGames subcollections.

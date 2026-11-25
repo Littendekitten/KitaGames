@@ -2,7 +2,7 @@ KITAGAMES — FULL GAME RULES
 ===========================
 
 Welcome to KitaGames. These are the rules and controls for every activity in
-this site. All games are free to play in the browser. You can play at your own
+this site, including the open-world game. All games are free to play in the browser. You can play at your own
 pace. The Chill and Cozy activities have no timers, scoreboards, or win
 conditions unless a description explicitly says otherwise.
 
@@ -222,3 +222,21 @@ ACCESSIBILITY AND FAIR PLAY
   password with anyone.
 - The site is a collection of small casual activities. Scores are stored as
   personal records only; no public ranking or competition is required.
+
+
+27. NEON DISTRICT: OPEN CITY
+Objective: Explore a large top-down city with moving traffic and sidewalk
+pedestrians, borrow cars, complete delivery jobs, collect cash bundles, visit
+the garage and try to shake police pursuit.
+Controls: WASD or Arrow Keys to move/drive; E to enter/exit/interact; Shift to
+sprint or boost; Space to handbrake; P to pause; F for fullscreen. On phones,
+use the on-screen D-pad and action buttons.
+Rules: Green markers show job contacts; reach one and press E to accept the job.
+A pink marker then shows the delivery destination; reach it and press E to
+collect the reward. Enter a parked vehicle by standing next to it and pressing
+E; doing so raises your wanted level. Avoid nearby police and stay out of sight
+until the wanted level cools down. The blue Garage marker repairs your active
+vehicle for $75. Yellow cash bundles can be collected while exploring. If your
+health runs out, you pay $150 bail and respawn downtown. Cash and completed jobs
+are saved locally in the current browser. See NEON_DISTRICT_RULES.txt for the
+full player guide.

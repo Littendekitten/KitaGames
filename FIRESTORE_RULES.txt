@@ -1,23 +1,20 @@
 KITAGAMES — FIRESTORE SECURITY RULES
 ====================================
 
-Paste the complete rules below into Firebase Console → Firestore Database →
-Rules, then click Publish. These rules protect private account saves and the
-player-made game library. No server, Cloud Functions, Firebase Storage or
-Admin SDK is used.
+Replace the rules in Firebase Console → Firestore Database → Rules with the
+complete rules below, then click Publish. The community shelf now reads a
+TOP-LEVEL /communityGames collection, not a collection-group query. This
+removes the custom collection-group index requirement.
 
 ----- COPY FROM THE NEXT LINE INTO FIRESTORE RULES -----
 
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-
     function signedIn(userId) {
       return request.auth != null && request.auth.uid == userId;
     }
 
-    // Guest/anonymous sessions may play and save personal game progress,
-    // but only a real Google/email account may create community games.
     function realAccount(userId) {
       return signedIn(userId)
         && request.auth.token.firebase.sign_in_provider != 'anonymous';
@@ -31,22 +28,22 @@ service cloud.firestore {
         && data.keys().hasAll([
           'favorites', 'bests', 'playedCount', 'createdAt', 'updatedAt'
         ])
-        && data.favorites is list
-        && data.favorites.size() <= 100
-        && data.bests is map
-        && data.bests.size() <= 100
-        && data.playedCount is int
-        && data.playedCount >= 0
-        && data.createdAt is timestamp
-        && data.updatedAt is timestamp
-        && (!('displayName' in data)
-            || (data.displayName is string && data.displayName.size() <= 80))
-        && (!('email' in data)
-            || (data.email is string && data.email.size() <= 254));
+        && data.favorites is list && data.favorites.size() <= 100
+        && data.bests is map && data.bests.size() <= 100
+        && data.playedCount is int && data.playedCount >= 0
+        && data.createdAt is timestamp && data.updatedAt is timestamp
+        && (!('displayName' in data) || (data.displayName is string && data.displayName.size() <= 80))
+        && (!('email' in data) || (data.email is string && data.email.size() <= 254));
     }
 
-    function validGameSlot(gameId) {
-      return gameId in ['game-1', 'game-2', 'game-3'];
+    function validSlot(slot) {
+      return slot in ['game-1', 'game-2', 'game-3'];
+    }
+
+    function validGameKey(gameKey, userId) {
+      return gameKey == userId + '__game-1'
+        || gameKey == userId + '__game-2'
+        || gameKey == userId + '__game-3';
     }
 
     function validCommunityGame(data, userId) {
@@ -58,74 +55,69 @@ service cloud.firestore {
           'title', 'description', 'code', 'published', 'ownerUid',
           'ownerName', 'createdAt', 'updatedAt', 'publishedAt'
         ])
-        && data.title is string
-        && data.title.size() >= 1
-        && data.title.size() <= 40
-        && data.description is string
-        && data.description.size() <= 140
-        && data.code is string
-        && data.code.size() >= 1
-        && data.code.size() <= 80000
-        && data.published is bool
-        && data.ownerUid == userId
-        && data.ownerName is string
-        && data.ownerName.size() <= 60
-        && data.createdAt is timestamp
-        && data.updatedAt is timestamp
+        && data.title is string && data.title.size() >= 1 && data.title.size() <= 40
+        && data.description is string && data.description.size() <= 140
+        && data.code is string && data.code.size() >= 1 && data.code.size() <= 80000
+        && data.published is bool && data.ownerUid == userId
+        && data.ownerName is string && data.ownerName.size() <= 60
+        && data.createdAt is timestamp && data.updatedAt is timestamp
         && (data.publishedAt == null || data.publishedAt is timestamp)
         && (!data.published || data.publishedAt is timestamp);
     }
 
     match /users/{userId} {
       allow read: if signedIn(userId);
-
       allow create: if signedIn(userId)
         && validProfile(request.resource.data)
         && request.resource.data.createdAt == request.time
         && request.resource.data.updatedAt == request.time;
-
       allow update: if signedIn(userId)
         && validProfile(request.resource.data)
         && request.resource.data.createdAt == resource.data.createdAt
         && request.resource.data.updatedAt == request.time;
-
       allow delete: if false;
 
-      // Exactly three possible document IDs means an account can own no more
-      // than three community-game documents. Deleting a slot makes it reusable.
-      match /communityGames/{gameId} {
-        allow read: if signedIn(userId) || resource.data.published == true;
-
-        allow create: if realAccount(userId)
-          && validGameSlot(gameId)
-          && validCommunityGame(request.resource.data, userId)
-          && request.resource.data.createdAt == request.time
-          && request.resource.data.updatedAt == request.time;
-
-        allow update: if realAccount(userId)
-          && validGameSlot(gameId)
-          && resource.data.ownerUid == userId
-          && validCommunityGame(request.resource.data, userId)
-          && request.resource.data.ownerUid == resource.data.ownerUid
-          && request.resource.data.createdAt == resource.data.createdAt
-          && request.resource.data.updatedAt == request.time;
-
-        allow delete: if realAccount(userId)
-          && validGameSlot(gameId)
+      // Legacy documents from older KitaGames versions can only be read and
+      // deleted by their owner while the app migrates them to /communityGames.
+      match /communityGames/{slot} {
+        allow get: if signedIn(userId) && validSlot(slot);
+        allow delete: if realAccount(userId) && validSlot(slot)
           && resource.data.ownerUid == userId;
+        allow create, update: if false;
       }
     }
 
-    // Required for collectionGroup('communityGames') public-library queries.
-    // The client must query with where('published', '==', true).
-    match /{path=**}/communityGames/{gameId} {
-      allow get: if resource.data.published == true;
+    // New canonical community game documents live at:
+    // /communityGames/{AUTH_UID}__game-1, __game-2 or __game-3.
+    // The path itself limits every account to exactly three reusable slots.
+    match /communityGames/{gameKey} {
+      allow get: if (request.auth != null && validGameKey(gameKey, request.auth.uid))
+        || resource.data.published == true;
       allow list: if resource.data.published == true
-        && request.query.limit != null
-        && request.query.limit <= 100;
+        && request.query.limit != null && request.query.limit <= 100;
+
+      allow create: if request.auth != null
+        && realAccount(request.auth.uid)
+        && validGameKey(gameKey, request.auth.uid)
+        && validCommunityGame(request.resource.data, request.auth.uid)
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time;
+
+      allow update: if request.auth != null
+        && realAccount(request.auth.uid)
+        && validGameKey(gameKey, request.auth.uid)
+        && resource.data.ownerUid == request.auth.uid
+        && validCommunityGame(request.resource.data, request.auth.uid)
+        && request.resource.data.ownerUid == resource.data.ownerUid
+        && request.resource.data.createdAt == resource.data.createdAt
+        && request.resource.data.updatedAt == request.time;
+
+      allow delete: if request.auth != null
+        && realAccount(request.auth.uid)
+        && validGameKey(gameKey, request.auth.uid)
+        && resource.data.ownerUid == request.auth.uid;
     }
 
-    // Everything not explicitly permitted above is private by default.
     match /{document=**} {
       allow read, write: if false;
     }
@@ -134,31 +126,17 @@ service cloud.firestore {
 
 ----- END OF COPY -----
 
-SECURITY AND LIMIT NOTES
-------------------------
-- The application writes each creator's games to:
-    users/{their-auth-uid}/communityGames/game-1
-    users/{their-auth-uid}/communityGames/game-2
-    users/{their-auth-uid}/communityGames/game-3
-  These are the only permitted game document IDs. Rules reject a fourth slot.
-- Users may create, edit, publish, unpublish and delete only their own game slots.
-- A Google/email account can publish. Anonymous/guest sessions cannot publish.
-- Published games are publicly readable; private drafts are readable only by
-  their owner. Public collection-group queries must filter published == true.
-- Each HTML source is limited to 80,000 characters. The site also checks this
-  before saving. Firestore rules repeat the limit so it cannot be bypassed by
-  editing requests in the browser.
-- Game HTML is stored directly in Firestore. No Cloud Storage, custom API,
-  server, Cloud Functions or other backend is used. Each game is a document.
-- Every uploaded game is played in an iframe with sandbox="allow-scripts" and
-  a restrictive Content Security Policy. The game has no same-origin access,
-  no access to the KitaGames DOM/storage/auth. The content policy blocks
-  external subresources and network APIs, while the iframe sandbox blocks
-  popups and top-level navigation. Inline JS/CSS and data-URL images are
-  supported; nested frames, forms and object embeds are removed/blocked. A
-  sandbox is not a malware scanner or content moderator, and browser-level
-  navigation within the embedded frame cannot be fully disabled while scripts
-  are enabled. Treat unfamiliar submissions with care.
-- The app displays creator display names, not email addresses.
-- Never use allow read, write: if true. Never put a Firebase Admin SDK
-  service-account key in this website.
+NOTES
+-----
+- Public app query is collection(db, 'communityGames') where published == true,
+  limit 100. It uses Firestore's normal collection-scoped single-field index.
+- No custom collection-group index or composite index is required. Do not disable
+  the default single-field index for the 'published' field in this collection.
+- New paths are /communityGames/{uid}__game-1 through __game-3. These three
+  permitted document IDs enforce the per-account maximum in security rules.
+- The first time an owner signs in on this release, the app copies any older
+  /users/{uid}/communityGames/game-N documents into the new top-level location,
+  then deletes those legacy copies. Publish these rules before opening the site.
+- Only Google/email accounts can publish. Anonymous users can play, not publish.
+- HTML is stored in Firestore (80,000 characters maximum) and played in a
+  restricted iframe. No custom API, server, Cloud Functions or Storage is used.

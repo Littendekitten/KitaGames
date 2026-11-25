@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#10131e">
-<meta name="description" content="KitaGames — a little play goes a long way. Twenty-six free games plus community creations, instantly playable.">
+<meta name="description" content="KitaGames — a little play goes a long way. Twenty-seven games plus community creations, instantly playable.">
 <title>KitaGames — Play a little. Smile a lot.</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800;900&display=swap');
@@ -77,6 +77,63 @@
 @media(max-width:760px){.community-heading{align-items:start;flex-direction:column}.community-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.community-card .card-art{height:105px}.maker-dialog{padding:15px;max-height:96vh}.maker-textarea{min-height:260px}.maker-preview-frame{height:290px}}
 @media(max-width:420px){.community-grid{gap:9px}.community-card .card-info{padding:10px}.community-card .card-desc{font-size:11px}.community-card-actions{padding:0 10px 10px}}
 
+
+/* Neon District — original top-down open-city sandbox */
+#gameScreen.openworld-layout{padding:10px 0 28px}
+#gameScreen.openworld-layout .game-top{margin-bottom:10px}
+#gameScreen.openworld-layout .game-layout{display:block}
+#gameScreen.openworld-layout .game-side{display:none}
+#gameScreen.openworld-layout .game-main{display:block;min-height:0;padding:7px;background:#08121b;border:1px solid rgba(115,224,220,.2);overflow:hidden}
+.neon-shell{position:relative;width:100%;overflow:hidden;border-radius:15px;background:#0a141c;isolation:isolate}
+.neon-canvas{display:block;width:100%;height:auto;aspect-ratio:16/9;max-height:calc(100vh - 190px);object-fit:contain;background:#263a35;touch-action:none}
+.neon-hud{position:absolute;inset:0;pointer-events:none;color:#f8fbff;font-family:'DM Sans',system-ui,sans-serif;text-shadow:0 2px 6px rgba(0,0,0,.8)}
+.neon-chip{background:rgba(7,15,23,.78);border:1px solid rgba(176,231,236,.18);box-shadow:0 8px 25px rgba(0,0,0,.2);backdrop-filter:blur(8px);border-radius:11px;padding:9px 12px}
+.neon-top-left{position:absolute;left:13px;top:13px;display:flex;flex-direction:column;gap:7px;max-width:min(330px,52%)}
+.neon-logo{font:900 13px 'DM Mono',monospace;letter-spacing:1.5px;color:#a6f3df}
+.neon-loc{font-size:11px;color:#dce7ef}
+.neon-money{font:800 16px 'DM Mono',monospace;color:#c5f36b}
+.neon-top-right{position:absolute;right:13px;top:13px;display:flex;align-items:flex-start;gap:9px}
+.neon-map{width:190px;height:128px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:#101b22;box-shadow:0 7px 22px rgba(0,0,0,.35)}
+.neon-wanted{display:flex;gap:2px;color:#ffd46c;font-size:17px;letter-spacing:1px;min-height:20px}
+.neon-status{font-size:10px;color:#c8d4e0;margin-top:3px}
+.neon-bottom-left{position:absolute;left:13px;bottom:13px;width:min(360px,55%)}
+.neon-mission-title{font-size:12px;font-weight:900;color:#b8f5e1;margin-bottom:3px}
+.neon-mission-copy{font-size:10px;line-height:1.4;color:#d6e0e9}
+.neon-bottom-right{position:absolute;right:13px;bottom:13px;display:flex;gap:7px;align-items:end;flex-direction:column}
+.neon-action{pointer-events:auto;border:1px solid rgba(255,255,255,.23);border-radius:9px;background:rgba(13,25,34,.88);color:white;padding:8px 11px;font-size:10px;font-weight:900;box-shadow:0 5px 16px rgba(0,0,0,.25)}
+.neon-action.primary{background:#b3f36b;color:#152019;border-color:#b3f36b}
+.neon-vitals{display:flex;gap:5px;align-items:center;font:10px 'DM Mono',monospace}
+.neon-bar{width:86px;height:7px;border-radius:99px;background:#3a4651;overflow:hidden;border:1px solid rgba(255,255,255,.16)}
+.neon-bar i{display:block;height:100%;background:#7de0aa;width:100%;transition:width .12s}
+.neon-controls-note{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:9px 5px 2px;color:#aebccc;font:10px 'DM Mono',monospace}
+.neon-controls-note b{color:#d7e7ef}
+.neon-mobile-pad{display:none;position:absolute;left:12px;bottom:12px;pointer-events:auto;gap:5px;grid-template-columns:repeat(3,38px);grid-template-rows:repeat(2,34px)}
+.neon-mobile-pad button,.neon-mobile-actions button{border:1px solid rgba(255,255,255,.24);background:rgba(6,16,24,.76);color:white;border-radius:9px;font-weight:900;touch-action:none;backdrop-filter:blur(6px)}
+.neon-mobile-pad button{font-size:14px}.neon-mobile-pad [data-nd-key="w"]{grid-column:2;grid-row:1}.neon-mobile-pad [data-nd-key="a"]{grid-column:1;grid-row:2}.neon-mobile-pad [data-nd-key="s"]{grid-column:2;grid-row:2}.neon-mobile-pad [data-nd-key="d"]{grid-column:3;grid-row:2}
+.neon-mobile-actions{display:none;position:absolute;right:12px;bottom:12px;gap:6px;pointer-events:auto;flex-wrap:wrap;justify-content:flex-end;max-width:145px}
+.neon-mobile-actions button{padding:10px 11px;font-size:10px}
+.neon-pause{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(4,11,18,.88);border:1px solid rgba(255,255,255,.2);border-radius:18px;padding:22px 30px;text-align:center;display:none;pointer-events:auto;min-width:210px}
+.neon-pause strong{display:block;font-size:23px;margin-bottom:5px}.neon-pause span{display:block;font-size:11px;color:#aebccc;margin-bottom:14px}
+.neon-shell.paused .neon-pause{display:block}
+#gameStage:fullscreen .neon-canvas,#gameStage.soft-fullscreen .neon-canvas{width:100%;height:100%;max-height:none;aspect-ratio:auto;object-fit:contain}
+#gameStage:fullscreen .neon-shell,#gameStage.soft-fullscreen .neon-shell{width:100%;height:100%;display:flex;align-items:center;justify-content:center;border-radius:0}
+#gameStage:fullscreen .neon-hud,#gameStage.soft-fullscreen .neon-hud{max-width:100%;max-height:100%}
+#gameStage:fullscreen .neon-canvas{max-width:100vw;max-height:100vh}
+@media(max-width:760px){
+ #gameScreen.openworld-layout .wrap{padding:0 8px}
+ #gameScreen.openworld-layout .game-top{padding:0 7px}
+ #gameScreen.openworld-layout .game-main{padding:3px;border-radius:12px}
+ .neon-canvas{aspect-ratio:4/3;max-height:calc(100vh - 205px)}
+ .neon-map{width:112px;height:78px}
+ .neon-top-left{left:7px;top:7px;max-width:48%;gap:4px}.neon-top-right{right:7px;top:7px;gap:5px;flex-direction:column;align-items:flex-end}
+ .neon-chip{padding:6px 8px;border-radius:8px}.neon-logo{font-size:10px}.neon-loc{font-size:9px}.neon-money{font-size:12px}.neon-wanted{font-size:13px}
+ .neon-bottom-left{left:7px;bottom:7px;width:48%}.neon-mission-title{font-size:10px}.neon-mission-copy{font-size:9px}
+ .neon-bottom-right{right:7px;bottom:7px}.neon-action{font-size:9px;padding:6px 8px}.neon-bar{width:54px}.neon-mobile-pad{display:grid}.neon-mobile-actions{display:flex}.neon-controls-note{font-size:8px;line-height:1.5}
+ .neon-mobile-pad,.neon-mobile-actions{bottom:87px}
+ .neon-bottom-left{bottom:8px}.neon-bottom-right{bottom:8px}
+}
+@media(max-width:430px){.neon-map{width:96px;height:66px}.neon-top-left{max-width:53%}.neon-top-right{gap:4px}.neon-logo{font-size:9px}.neon-mobile-pad{transform:scale(.88);transform-origin:bottom left;left:4px}.neon-mobile-actions{max-width:122px;right:4px}.neon-mobile-actions button{padding:8px;font-size:9px}}
+
 </style>
 </head>
 <body>
@@ -92,8 +149,8 @@
         <div class="eyebrow">Your next favorite game is here</div>
         <h1>Play a little.<br><span class="accent">Smile a lot.</span></h1>
         <p class="hero-copy">Take on a puzzle, try an arcade classic, grow a tiny garden, or just watch the koi drift by. No downloads, no rush — just play your way.</p>
-        <div class="hero-actions"><button class="primary-btn" id="exploreBtn">Explore games <span aria-hidden="true">↗</span></button><button class="secondary-btn" id="randomBtn">🎲 Surprise me</button></div>
-        <div class="mini-stats"><div class="mini-stat"><strong>26+</strong><span>Free games</span></div><div class="mini-stat"><strong>0</strong><span>Downloads</span></div><div class="mini-stat"><strong>6</strong><span>Chill activities</span></div></div>
+        <div class="hero-actions"><button class="primary-btn" id="exploreBtn">Explore games <span aria-hidden="true">↗</span></button><button class="secondary-btn" id="cityBtn">🚘 Explore Neon District</button><button class="secondary-btn" id="randomBtn">🎲 Surprise me</button></div>
+        <div class="mini-stats"><div class="mini-stat"><strong>27+</strong><span>Free games</span></div><div class="mini-stat"><strong>0</strong><span>Downloads</span></div><div class="mini-stat"><strong>6</strong><span>Chill activities</span></div></div>
       </div>
       <div class="hero-art" aria-hidden="true"><div class="orbit"><div class="orbit-core">K</div><div class="float f1">🐍</div><div class="float f2">🧩</div><div class="float f3">🚀</div><div class="float f4">🎯</div></div></div>
     </section>
@@ -119,7 +176,7 @@
     <div class="game-top"><button class="back-btn" id="backBtn">← All games</button><div class="playing-title"><h2 id="playingTitle">Game</h2><p id="playingSubtitle">Ready, set, play.</p></div><div class="game-actions"><button class="small-btn" id="favoriteCurrent">♡ Save</button><button class="small-btn" id="restartBtn">↻ Restart</button><button class="small-btn" id="fullscreenBtn" title="Enter fullscreen (F)">⛶ Fullscreen</button></div></div>
     <div class="game-layout"><div class="game-main" id="gameStage"></div><aside class="game-side"><div><div class="side-label">How to play</div><p class="side-desc" id="gameInstructions"></p></div><div id="sessionPanel"><div class="side-label">Your session</div><div class="stat-line"><span>Score</span><strong id="sessionScore">0</strong></div><div class="stat-line"><span>Best</span><strong id="sessionBest">0</strong></div><div class="stat-line"><span>Games played</span><strong id="sessionPlayed">0</strong></div></div><div id="relaxPanel" class="relax-panel" hidden>✿ No timer. No score. Just a little moment for you.</div><div class="tip-box" id="gameTip">💡 Have fun. Your next high score is waiting.</div></aside></div>
   </section>
-  <footer class="footer"><span>© <span id="year"></span> <b>KitaGames</b>. Made for the joy of play.</span><span>26+ ways to play. Your pace, your place. ✦</span></footer>
+  <footer class="footer"><span>© <span id="year"></span> <b>KitaGames</b>. Made for the joy of play.</span><span>27+ ways to play. Your pace, your place. ✦</span></footer>
 </div>
 
 
@@ -195,9 +252,10 @@ const GAMES = [
  {id:'pond',name:'Koi Pond',category:'Chill',icon:'🐟',desc:'A peaceful pond. A few curious koi. Nothing to rush.',tag:'Ambient',art:'linear-gradient(135deg,#2c777c,#8ebdb2)',relax:true,image:'assets/art-18.webp',instructions:'Watch the koi swim around the pond. Tap or click the water to sprinkle a little food; the fish will come over to investigate. Use Pause fish whenever you want a still moment.',tip:'Try dropping food in different corners and watch how the koi turn.'},
  {id:'rain',name:'Rainy Window',category:'Chill',icon:'🌧️',desc:'Settle in with a cozy room and adjustable rainfall.',tag:'Ambient',art:'linear-gradient(135deg,#314a66,#bd9877)',relax:true,image:'assets/art-16.webp',instructions:'This is a little ambient space. Adjust the rain slider to change how much rain falls outside the window. Switch between afternoon and evening light. There are no goals or scores.',tip:'Take a breath, get comfy, and stay for as long as you like.'},
  {id:'stars',name:'Stargazer',category:'Creative',icon:'✨',desc:'Connect the stars and make your own constellations.',tag:'Create',art:'linear-gradient(135deg,#18294d,#8473a8)',relax:true,image:'assets/art-20.webp',instructions:'Choose a star pattern, then tap the glowing stars in order to connect them. Finish the outline to reveal the constellation name. You can switch patterns or clear the lines at any time.',tip:'There is no timer. Take your time finding each star.'},
- {id:'canvas',name:'Color Studio',category:'Creative',icon:'🎨',desc:'A blank canvas, a few colors, and room to play.',tag:'Make stuff',art:'linear-gradient(135deg,#c681a5,#7289bd)',relax:true,image:'assets/art-13.webp',instructions:'Draw with your mouse, finger or stylus. Pick a color and brush size, then make anything you like. Use the eraser or clear button to change direction. Your art stays on the canvas while this game is open.',tip:'There is no wrong way to use the colors. Make something messy and fun.'}
+ {id:'canvas',name:'Color Studio',category:'Creative',icon:'🎨',desc:'A blank canvas, a few colors, and room to play.',tag:'Make stuff',art:'linear-gradient(135deg,#c681a5,#7289bd)',relax:true,image:'assets/art-13.webp',instructions:'Draw with your mouse, finger or stylus. Pick a color and brush size, then make anything you like. Use the eraser or clear button to change direction. Your art stays on the canvas while this game is open.',tip:'There is no wrong way to use the colors. Make something messy and fun.'},
+ {id:'neondistrict',name:'Neon District: Open City',category:'Open World',icon:'🚘',desc:'Explore a living city, borrow rides, run jobs and lose the heat.',tag:'Open world',art:'linear-gradient(135deg,#153f4d,#39234a)',image:'assets/neondistrict-cover.webp',instructions:'Explore a huge top-down city on foot or behind the wheel. WASD / arrow keys move or drive. Press E near a car to get in or out, or near a glowing job marker to accept and deliver a job. Shift sprints or boosts; Space is the handbrake; P pauses. Use the map to find jobs and garages.',tip:'Keep an eye on your wanted level. Break line of sight, duck into side streets and stay out of sight until the heat cools.'}
 ];
-const CATEGORIES=['All games','Chill','Cozy','Creative','Arcade','Puzzle','Strategy','Skill','Memory','Classic','Favorites'];
+const CATEGORIES=['All games','Chill','Cozy','Creative','Open World','Arcade','Puzzle','Strategy','Skill','Memory','Classic','Favorites'];
 const ART_BY_GAME={"snake":"assets/art-01.webp","2048":"assets/art-02.webp","tictactoe":"assets/art-03.webp","memory":"assets/art-04.webp","mines":"assets/art-05.webp","breakout":"assets/art-06.webp","pong":"assets/art-06.webp","flappy":"assets/art-07.webp","tetris":"assets/art-08.webp","simon":"assets/art-09.webp","whack":"assets/art-10.webp","reaction":"assets/art-11.webp","aim":"assets/art-12.webp","wordle":"assets/art-13.webp","connect":"assets/art-14.webp","rps":"assets/art-15.webp","lights":"assets/art-11.webp","sliding":"assets/art-03.webp","math":"assets/art-13.webp","typing":"assets/art-13.webp","clouds":"assets/art-19.webp","garden":"assets/art-17.webp","pond":"assets/art-18.webp","rain":"assets/art-16.webp","stars":"assets/art-20.webp","canvas":"assets/art-13.webp"};
 GAMES.forEach(g=>{g.image=g.image||ART_BY_GAME[g.id];});
 
@@ -219,7 +277,7 @@ function renderFilters(){const root=$('#filters');root.innerHTML=CATEGORIES.map(
 function visibleGames(){return GAMES.filter(g=>(currentFilter==='All games'||(currentFilter==='Favorites'?favorites.has(g.id):g.category===currentFilter||g.tag===currentFilter))&&(g.name+' '+g.desc+' '+g.category+' '+g.tag).toLowerCase().includes(currentSearch))}
 function renderGames(){const grid=$('#gameGrid'),items=visibleGames();if(!items.length){grid.innerHTML='<div class="empty-state"><b>No games found — yet!</b>Try another search or category.</div>';return}grid.innerHTML=items.map(g=>`<article class="game-card" data-game="${g.id}" tabindex="0" role="button" aria-label="Play ${g.name}"><div class="card-art" style="--art:${g.art}"><img class="card-photo" src="${g.image}" alt="" loading="lazy" decoding="async"><span class="card-tag">${g.tag}</span><button class="fav-btn ${favorites.has(g.id)?'saved':''}" data-fav="${g.id}" aria-label="${favorites.has(g.id)?'Remove':'Add'} ${g.name} ${favorites.has(g.id)?'from':'to'} favorites">${favorites.has(g.id)?'♥':'♡'}</button><span class="card-icon">${g.icon}</span></div><div class="card-info"><div class="card-title-row"><span class="card-title">${g.name}</span><span class="play-hint">PLAY ↗</span></div><p class="card-desc">${g.desc}</p><div class="card-meta"><span>${g.category}</span><span>${g.relax?"✿ No pressure":"▶ Play now"}</span></div></div></article>`).join('');grid.querySelectorAll('.game-card').forEach(card=>{card.addEventListener('click',e=>{if(e.target.closest('[data-fav]'))return;launchGame(card.dataset.game)});card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();launchGame(card.dataset.game)}})});grid.querySelectorAll('[data-fav]').forEach(btn=>btn.addEventListener('click',e=>{e.stopPropagation();toggleFavorite(btn.dataset.fav)}))}
 function toggleFavorite(id){if(favorites.has(id))favorites.delete(id);else favorites.add(id);localStorage.setItem('kitagames-favorites',JSON.stringify([...favorites]));renderGames();window.dispatchEvent(new Event('kitagames:datachanged'));if(currentGame&&currentGame.id===id)$('#favoriteCurrent').textContent=favorites.has(id)?'♥ Saved':'♡ Save'}
-function launchGame(id){const g=GAMES.find(x=>x.id===id);if(!g)return;closeGameFullscreen();cleanupGame();window.kitaCommunityActive=null;$('#favoriteCurrent').hidden=false;$('#restartBtn').textContent='↻ Restart';currentGame=g;playedCount++;localStorage.setItem('kitagames-played',String(playedCount));window.dispatchEvent(new Event('kitagames:datachanged'));currentScore=0;$('#homeScreen').style.display='none';$('#gameScreen').style.display='block';$('#gameScreen').classList.toggle('relax-mode',!!g.relax);$('#playingTitle').textContent=g.name;$('#playingSubtitle').textContent=g.category+' · '+g.tag;$('#gameInstructions').textContent=g.instructions;$('#gameTip').textContent='✦ '+g.tip;$('#sessionScore').textContent='0';$('#sessionBest').textContent=String(bestFor(id));$('#sessionPlayed').textContent=String(playedCount);$('#sessionPanel').style.display=g.relax?'none':'';$('#relaxPanel').hidden=!g.relax;$('#favoriteCurrent').textContent=favorites.has(id)?'♥ Saved':'♡ Save';$('#gameStage').innerHTML='';setMessage('');initGame(id);window.scrollTo({top:0,behavior:'smooth'})}
+function launchGame(id){const g=GAMES.find(x=>x.id===id);if(!g)return;closeGameFullscreen();cleanupGame();$('#gameScreen').classList.toggle('openworld-layout',id==='neondistrict');window.kitaCommunityActive=null;$('#favoriteCurrent').hidden=false;$('#restartBtn').textContent='↻ Restart';currentGame=g;playedCount++;localStorage.setItem('kitagames-played',String(playedCount));window.dispatchEvent(new Event('kitagames:datachanged'));currentScore=0;$('#homeScreen').style.display='none';$('#gameScreen').style.display='block';$('#gameScreen').classList.toggle('relax-mode',!!g.relax);$('#playingTitle').textContent=g.name;$('#playingSubtitle').textContent=g.category+' · '+g.tag;$('#gameInstructions').textContent=g.instructions;$('#gameTip').textContent='✦ '+g.tip;$('#sessionScore').textContent='0';$('#sessionBest').textContent=String(bestFor(id));$('#sessionPlayed').textContent=String(playedCount);$('#sessionPanel').style.display=g.relax?'none':'';$('#relaxPanel').hidden=!g.relax;$('#favoriteCurrent').textContent=favorites.has(id)?'♥ Saved':'♡ Save';$('#gameStage').innerHTML='';setMessage('');initGame(id);window.scrollTo({top:0,behavior:'smooth'})}
 
 function buildCommunitySandboxDocument(raw){
  const restrictive='<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; script-src \'unsafe-inline\'; style-src \'unsafe-inline\'; img-src data: blob:; media-src data: blob:; font-src data:; connect-src \'none\'; frame-src \'none\'; object-src \'none\'; base-uri \'none\'; form-action \'none\'; worker-src \'none\'; manifest-src \'none\'">';
@@ -231,8 +289,10 @@ function buildCommunitySandboxDocument(raw){
 window.kitaBuildSandboxDocument=buildCommunitySandboxDocument;
 window.kitaOpenCommunityGame=function(game){
  if(!game||typeof game.code!=='string')return;
+ // Keep a permanent, refresh-safe URL for every public player-made game.
+ if(game.published&&game.ownerUid&&game.slot){const sharedUrl=new URL(window.location.href);sharedUrl.search='';sharedUrl.hash='';sharedUrl.searchParams.set('play',`${game.ownerUid}/${game.slot}`);history.replaceState(null,'',sharedUrl);}
  closeGameFullscreen();cleanupGame();currentGame=null;window.kitaCommunityActive=game;
- $('#homeScreen').style.display='none';$('#gameScreen').style.display='block';$('#gameScreen').classList.remove('relax-mode');
+ $('#homeScreen').style.display='none';$('#gameScreen').style.display='block';$('#gameScreen').classList.remove('relax-mode','openworld-layout');
  $('#playingTitle').textContent=game.title||'Community game';$('#playingSubtitle').textContent='Community game · by '+(game.ownerName||'Kita creator');
  $('#gameInstructions').textContent='A player-made HTML game. It runs in an isolated sandbox, separate from your KitaGames account and the main site.';
  $('#gameTip').textContent='✦ This game is player-created. The sandbox blocks external resource loads and network APIs, and prevents popups or top-level redirects. Player code is not pre-moderated.';
@@ -247,7 +307,7 @@ function gameStartMarkup(){return '<button class="game-primary" id="startGameBtn
 function mountMessage(){const p=document.createElement('p');p.className='game-message';p.id='gameMessage';$('#gameStage').appendChild(p);return p}
 function initGame(id){const stage=$('#gameStage');
  switch(id){
- case 'snake': initSnake(stage);break; case '2048':init2048(stage);break;case 'tictactoe':initTicTacToe(stage);break;case 'memory':initMemory(stage);break;case 'mines':initMines(stage);break;case 'breakout':initBreakout(stage);break;case 'pong':initPong(stage);break;case 'flappy':initFlappy(stage);break;case 'tetris':initTetris(stage);break;case 'simon':initSimon(stage);break;case 'whack':initWhack(stage);break;case 'reaction':initReaction(stage);break;case 'aim':initAim(stage);break;case 'wordle':initWordle(stage);break;case 'connect':initConnect(stage);break;case 'rps':initRps(stage);break;case 'lights':initLights(stage);break;case 'sliding':initSliding(stage);break;case 'math':initMath(stage);break;case 'typing':initTyping(stage);break;case 'clouds':initCloudDrift(stage);break;case 'garden':initTinyGarden(stage);break;case 'pond':initKoiPond(stage);break;case 'rain':initRainyWindow(stage);break;case 'stars':initStargazer(stage);break;case 'canvas':initColorStudio(stage);break;
+ case 'neondistrict':initNeonDistrict(stage);break; case 'snake': initSnake(stage);break; case '2048':init2048(stage);break;case 'tictactoe':initTicTacToe(stage);break;case 'memory':initMemory(stage);break;case 'mines':initMines(stage);break;case 'breakout':initBreakout(stage);break;case 'pong':initPong(stage);break;case 'flappy':initFlappy(stage);break;case 'tetris':initTetris(stage);break;case 'simon':initSimon(stage);break;case 'whack':initWhack(stage);break;case 'reaction':initReaction(stage);break;case 'aim':initAim(stage);break;case 'wordle':initWordle(stage);break;case 'connect':initConnect(stage);break;case 'rps':initRps(stage);break;case 'lights':initLights(stage);break;case 'sliding':initSliding(stage);break;case 'math':initMath(stage);break;case 'typing':initTyping(stage);break;case 'clouds':initCloudDrift(stage);break;case 'garden':initTinyGarden(stage);break;case 'pond':initKoiPond(stage);break;case 'rain':initRainyWindow(stage);break;case 'stars':initStargazer(stage);break;case 'canvas':initColorStudio(stage);break;
  }
 }
 function mkButton(text,fn,cls='game-card-btn'){const b=document.createElement('button');b.className=cls;b.textContent=text;b.addEventListener('click',fn);return b}
@@ -320,6 +380,228 @@ function initStargazer(stage){
  function draw(){ctx.fillStyle='#111b36';ctx.fillRect(0,0,900,500);for(let i=0;i<150;i++){let x=(i*173)%900,y=(i*89)%500;ctx.fillStyle=`rgba(255,255,255,${.13+(i%5)*.11})`;ctx.fillRect(x,y,1.5,1.5)}ctx.strokeStyle='rgba(151,187,255,.8)';ctx.lineWidth=3;ctx.lineCap='round';if(chosen.length>1){ctx.beginPath();ctx.moveTo(pts[chosen[0]].x,pts[chosen[0]].y);chosen.slice(1).forEach(i=>ctx.lineTo(pts[i].x,pts[i].y));ctx.stroke()}pts.forEach((p,i)=>{ctx.fillStyle=i<chosen.length?'#f8e6a4':'#d7e7ff';ctx.shadowColor='#a4c7ff';ctx.shadowBlur=i===chosen.length?24:12;ctx.beginPath();ctx.arc(p.x,p.y,i===chosen.length?9:6,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0});$('#starHint').textContent=done?'A little constellation found ✨':`Find star ${chosen.length+1} of ${pts.length}`}
  function reset(){chosen=[];done=false;points();draw()}listen(c,'pointerdown',e=>{if(done)return;const r=c.getBoundingClientRect(),x=(e.clientX-r.left)*900/r.width,y=(e.clientY-r.top)*500/r.height,p=pts[chosen.length];if(p&&Math.hypot(p.x-x,p.y-y)<34){chosen.push(chosen.length);if(chosen.length===pts.length)done=true;draw()}});$('#starShape').onchange=e=>{shape=e.target.value;reset()};$('#starClear').onclick=reset;reset();mountMessage();
 }
+function initNeonDistrict(stage){
+ // NEON DISTRICT is an original top-down city sandbox built with Canvas 2D.
+ // The world is generated deterministically and runs entirely in this browser.
+ stage.innerHTML=`
+  <div class="neon-shell" id="ndShell">
+   <canvas id="neonCityCanvas" class="neon-canvas" width="1280" height="720" aria-label="Neon District open-world city game"></canvas>
+   <div class="neon-hud">
+    <div class="neon-top-left">
+     <div class="neon-chip"><div class="neon-logo">KITA CITY // DISTRICT 09</div><div class="neon-loc" id="ndLocation">OLD TOWN</div><div class="neon-money" id="ndMoney">$ 500</div></div>
+     <div class="neon-chip"><div class="neon-wanted" id="ndWanted">NO HEAT</div><div class="neon-status" id="ndStatus">Find a ride. Find your story.</div></div>
+    </div>
+    <div class="neon-top-right"><canvas id="ndMap" class="neon-map" width="240" height="160" aria-label="City minimap"></canvas><div class="neon-chip"><div class="neon-vitals">HEALTH <span class="neon-bar"><i id="ndHealthBar"></i></span></div><div class="neon-vitals" style="margin-top:5px">CAR <span class="neon-bar"><i id="ndCarBar" style="background:#79cfff"></i></span></div><div class="neon-status" id="ndRideStatus">ON FOOT</div></div></div>
+    <div class="neon-bottom-left"><div class="neon-chip"><div class="neon-mission-title" id="ndMissionTitle">CITY LIFE</div><div class="neon-mission-copy" id="ndMissionCopy">Explore the blocks. Look for the glowing green job marker.</div></div></div>
+    <div class="neon-bottom-right"><div class="neon-chip"><div class="neon-vitals">JOBS <strong id="ndJobs">0</strong> &nbsp; REP <strong id="ndRep">ROOKIE</strong></div></div><button class="neon-action primary" id="ndPauseButton">Ⅱ Pause</button></div>
+    <div class="neon-mobile-pad" aria-label="Movement controls"><button data-nd-key="w">▲</button><button data-nd-key="a">◀</button><button data-nd-key="s">▼</button><button data-nd-key="d">▶</button></div>
+    <div class="neon-mobile-actions"><button data-nd-key="shift">BOOST</button><button data-nd-action="interact">E · USE</button><button data-nd-key="space">BRAKE</button></div>
+    <div class="neon-pause" id="ndPause"><strong>PAUSED</strong><span>Take a breather. The city can wait.</span><button class="neon-action primary" id="ndResume">Resume city</button></div>
+   </div>
+  </div>
+  <div class="neon-controls-note"><span><b>WASD / ARROWS</b> move & drive · <b>E</b> enter / interact · <b>SHIFT</b> sprint / boost</span><span><b>SPACE</b> handbrake · <b>P</b> pause · <b>F</b> fullscreen</span></div>`;
+ const canvas=$('#neonCityCanvas'),ctx=canvas.getContext('2d'),map=$('#ndMap'),mctx=map.getContext('2d');
+ const CW=canvas.width,CH=canvas.height,W=3800,H=2820,ROAD=112;
+ const roadX=[260,810,1360,1910,2460,3010,3560],roadY=[230,700,1170,1640,2110,2580];
+ const rand=(a,b)=>a+Math.random()*(b-a),clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
+ const palette=['#596777','#7e665b','#536c70','#6a617d','#7c785f','#4e637d','#8a6958','#526e64'];
+ const buildings=[],trees=[],cars=[],traffic=[],pedestrians=[],police=[],cashDrops=[];
+ const key={};let raf=0,last=0,paused=false,night=0.25,crimeAt=0,lastPoliceSpawn=0,toastUntil=0,toastText='';
+ let cash=500,jobsDone=0,health=100,wanted=0,heatTimer=0,player={x:roadX[3]-26,y:roadY[2]+30,a:0,vx:0,vy:0},vehicle=null;
+ try{const save=JSON.parse(localStorage.getItem('kitagames-neondistrict')||'{}');cash=Number.isFinite(Number(save.cash))?Math.max(0,Number(save.cash)):500;jobsDone=Math.max(0,Number(save.jobs)||0)}catch(e){}
+ const jobs=[
+  {name:'MIDNIGHT COURIER',brief:'Pick up a sealed parcel. Take it across town to the pink drop point.',start:[roadX[1],roadY[1]],dest:[roadX[5],roadY[4]],reward:450},
+  {name:'THE LONG WAY HOME',brief:'A mechanic needs a tool case delivered to the garage district.',start:[roadX[5],roadY[1]],dest:[roadX[1],roadY[4]],reward:620},
+  {name:'NIGHT SHIFT PICKUP',brief:'Meet a night-shift worker downtown and get them to the waterfront.',start:[roadX[2],roadY[4]],dest:[roadX[6],roadY[2]],reward:700},
+  {name:'NEON RUN',brief:'A record shop has a late delivery. Make the cross-city run.',start:[roadX[6],roadY[3]],dest:[roadX[0],roadY[1]],reward:850}
+ ];
+ let jobIndex=jobsDone%jobs.length,jobPhase='start';
+ const treesSeed=()=>{for(let r=0;r<5;r++)for(let c=0;c<6;c++){
+  const x1=roadX[c]+ROAD/2+17,y1=roadY[r]+ROAD/2+17,x2=roadX[c+1]-ROAD/2-17,y2=roadY[r+1]-ROAD/2-17,bw=x2-x1,bh=y2-y1;
+  const park=(r===2&&c===4)||(r===0&&c===2);
+  if(park){for(let i=0;i<17;i++)trees.push({x:rand(x1+15,x2-15),y:rand(y1+15,y2-15),r:rand(12,21),park:true});continue}
+  const layouts=[
+   [x1+8,y1+8,bw*.43,bh*.43],[x1+bw*.53,y1+7,bw*.44,bh*.39],
+   [x1+8,y1+bh*.53,bw*.4,bh*.43],[x1+bw*.5,y1+bh*.5,bw*.49,bh*.46]
+  ];
+  layouts.forEach((v,i)=>{const w=v[2]*rand(.91,1.02),h=v[3]*rand(.9,1.02);buildings.push({x:v[0],y:v[1],w,h,color:palette[(r*7+c*3+i)%palette.length],name:(r===1&&c===4&&i===0)?'AUTO SHOP':(r===0&&c===3&&i===0?'NIGHT MARKET':'')})});
+  for(let i=0;i<4;i++)trees.push({x:rand(x1+5,x2-5),y:rand(y1+5,y2-5),r:rand(7,10),park:false});
+ }};
+ treesSeed();
+ // Parked vehicles are available to borrow; the top-down car art is drawn in code.
+ const carColors=['#ed655d','#42a2b9','#d5a94e','#8d7bd1','#e5e8e7','#56a67f','#d47eae','#6684bd'];
+ let carId=0;
+ roadY.forEach((y,ri)=>roadX.forEach((x,ci)=>{
+  if((ri+ci)%2===0){cars.push({id:carId++,x:x+150+(ci%2)*35,y:y-33,a:0,speed:0,color:carColors[(ri*3+ci)%carColors.length],parked:true,health:100,locked:false,stolen:false});}
+  if((ri+ci)%3===1){cars.push({id:carId++,x:x-35,y:y+155+(ri%2)*18,a:Math.PI/2,speed:0,color:carColors[(ri+ci+3)%carColors.length],parked:true,health:100,locked:false,stolen:false});}
+ }));
+ // Ambient traffic cruises the avenues in simple loops.
+ for(let i=0;i<16;i++){
+  const horizontal=i%2===0,ri=(i*3)%roadY.length,ci=(i*5)%roadX.length;
+  traffic.push({x:horizontal?rand(0,W):roadX[ci]+(i%2?25:-25),y:horizontal?roadY[ri]+(i%3===0?27:-27):rand(0,H),a:horizontal?(i%4===0?Math.PI:0):(i%4===1?Math.PI/2:-Math.PI/2),axis:horizontal?'x':'y',dir:i%3===0?-1:1,speed:rand(1.05,1.85),color:carColors[i%carColors.length]});
+ }
+ // Small pedestrians stroll along sidewalks, giving the streets a little life.
+ const pedestrianColors=['#f0a36d','#86c5d8','#c7a2eb','#e4d28d','#dc8f9a','#9cc79b','#d5dce7'];
+ for(let i=0;i<44;i++){
+  const horizontal=i%2===0,ri=(i*7)%roadY.length,ci=(i*5)%roadX.length,side=i%4<2?-1:1;
+  pedestrians.push({x:horizontal?rand(40,W-40):roadX[ci]+side*65,y:horizontal?roadY[ri]+side*65:rand(40,H-40),axis:horizontal?'x':'y',dir:i%3===0?-1:1,speed:rand(.28,.62),color:pedestrianColors[i%pedestrianColors.length],phase:Math.random()*6});
+ }
+ for(let i=0;i<14;i++){const ri=(i*2)%roadY.length,ci=(i*3)%roadX.length;cashDrops.push({x:roadX[ci]+(i%2?55:-55),y:roadY[ri]+(i%3?58:-58),value:rand(45,105)|0,active:true});}
+ const garage={x:roadX[4]+65,y:roadY[1]+80};
+ const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
+ const currentJob=()=>jobs[jobIndex%jobs.length];
+ const objective=()=>jobPhase==='start'?currentJob().start:currentJob().dest;
+ const pointBlocked=(x,y,r=14)=>{
+  if(x<r||y<r||x>W-r||y>H-r)return true;
+  for(const b of buildings){const px=clamp(x,b.x,b.x+b.w),py=clamp(y,b.y,b.y+b.h);if(Math.hypot(x-px,y-py)<r)return true;}
+  return false;
+ };
+ function say(text,ms=2600){toastText=text;toastUntil=performance.now()+ms;$('#ndStatus').textContent=text;}
+ function save(){try{localStorage.setItem('kitagames-neondistrict',JSON.stringify({cash,jobs:jobsDone}))}catch(e){}}
+ function setWanted(n){wanted=clamp(Math.max(wanted,n),0,5);crimeAt=performance.now();heatTimer=0;updateHud()}
+ function updateHud(){
+  $('#ndMoney').textContent='$ '+Math.floor(cash).toLocaleString();
+  $('#ndWanted').textContent=wanted?('★'.repeat(wanted)+'☆'.repeat(5-wanted)):'NO HEAT';
+  $('#ndHealthBar').style.width=health+'%';$('#ndCarBar').style.width=(vehicle?vehicle.health:100)+'%';
+  $('#ndRideStatus').textContent=vehicle?'IN '+(vehicle.health<30?'DAMAGED RIDE':'VEHICLE'):'ON FOOT';
+  $('#ndJobs').textContent=jobsDone;$('#ndRep').textContent=jobsDone>=10?'CITY LEGEND':jobsDone>=5?'KNOWN FACE':jobsDone>=2?'REGULAR':'ROOKIE';
+  const j=currentJob();$('#ndMissionTitle').textContent=jobPhase==='start'?'JOB AVAILABLE · '+j.name:'ACTIVE JOB · '+j.name;
+  $('#ndMissionCopy').textContent=jobPhase==='start'?'Meet the contact at the green marker. Press E when you arrive.':j.brief+' Reach the pink marker and press E.';
+ }
+ function interact(){
+  if(paused)return;
+  // Job markers work whether the player is walking or driving.
+  const o=objective(),jobDistance=Math.hypot(player.x-o[0],player.y-o[1]);
+  if(jobDistance<82){
+   if(jobPhase==='start'){jobPhase='dest';say('Package collected. Follow the pink marker to the drop.');}
+   else{const j=currentJob();cash+=j.reward;jobsDone++;jobIndex++;jobPhase='start';save();say('Delivery complete! +$'+j.reward+' · New job available.');}
+   updateHud();return;
+  }
+  // Repair service is available without leaving the vehicle.
+  if(vehicle&&Math.hypot(player.x-garage.x,player.y-garage.y)<100){
+   if(cash>=75){cash-=75;vehicle.health=100;vehicle.speed=0;say('Garage service complete. $75.');}
+   else say('Garage service costs $75.');
+   updateHud();return;
+  }
+  if(vehicle){
+   const ex=vehicle.x+Math.cos(vehicle.a+Math.PI/2)*33,ey=vehicle.y+Math.sin(vehicle.a+Math.PI/2)*33;
+   if(!pointBlocked(ex,ey,13)){player.x=ex;player.y=ey;player.a=vehicle.a;vehicle.speed=0;vehicle.parked=true;vehicle=null;say('Back on foot. The city is yours.');}
+   else say('There is no room to get out here.');
+   updateHud();return;
+  }
+  let nearest=null,near=56;for(const c of cars){const d=dist(player,c);if(c.parked&&d<near){nearest=c;near=d}}
+  if(nearest){const firstBorrow=!nearest.stolen;nearest.parked=false;nearest.stolen=true;vehicle=nearest;player.x=nearest.x;player.y=nearest.y;player.a=nearest.a;if(firstBorrow)setWanted(Math.max(1,wanted));say(firstBorrow?'Ride borrowed. Keep moving if you want to lose the heat.':'Back in your ride.');updateHud();return;}
+  if(Math.hypot(player.x-garage.x,player.y-garage.y)<90){say('Bring a vehicle here for a quick repair.');return;}
+  say('Nothing nearby. Look for cars, green jobs and the garage.');
+ }
+ function spawnPolice(){
+  if(wanted<=0||police.length>=(wanted+1)*2)return;
+  const a=roadX[(Math.random()*roadX.length)|0],b=roadY[(Math.random()*roadY.length)|0];
+  const x=a+(Math.random()<.5?-155:155),y=b+(Math.random()<.5?-145:145);
+  police.push({x:clamp(x,30,W-30),y:clamp(y,30,H-30),a:Math.atan2(player.y-y,player.x-x),speed:0,health:100,blink:Math.random()*10});
+ }
+ function drawCar(g,isPolice=false,isTraffic=false){
+  ctx.save();ctx.translate(g.x,g.y);ctx.rotate(g.a);
+  // soft contact shadow, wheel wells and body
+  ctx.fillStyle='rgba(0,0,0,.32)';ctx.beginPath();ctx.ellipse(1,5,25,15,0,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#11191f';ctx.fillRect(-18,-16,11,5);ctx.fillRect(7,-16,11,5);ctx.fillRect(-18,11,11,5);ctx.fillRect(7,11,11,5);
+  ctx.fillStyle=isPolice?'#e7edf3':g.color;ctx.beginPath();ctx.roundRect(-24,-13,48,26,7);ctx.fill();
+  ctx.fillStyle=isPolice?'#1e2d3f':'rgba(13,29,41,.85)';ctx.beginPath();ctx.roundRect(-8,-10,19,20,5);ctx.fill();
+  ctx.fillStyle='rgba(166,219,230,.65)';ctx.fillRect(-5,-8,6,16);ctx.fillRect(3,-8,6,16);
+  ctx.fillStyle='#fff0c8';ctx.fillRect(19,-9,4,5);ctx.fillRect(19,4,4,5);
+  ctx.fillStyle='#fa625d';ctx.fillRect(-23,-9,3,5);ctx.fillRect(-23,4,3,5);
+  if(isPolice){ctx.fillStyle=(Math.floor(performance.now()/180+g.blink)%2)?'#f44364':'#4b8aff';ctx.fillRect(-3,-13,8,4);ctx.fillStyle='#182a3a';ctx.font='bold 6px sans-serif';ctx.textAlign='center';ctx.fillText('POLICE',-1,2)}
+  else if(g.stolen){ctx.fillStyle='rgba(255,255,255,.5)';ctx.fillRect(-1,-1,3,2)}
+  if(!isTraffic&&g===vehicle&&g.health<35){ctx.fillStyle='rgba(255,90,70,.7)';ctx.fillRect(-2,-18,4,7)}
+  ctx.restore();
+ }
+ function drawPlayer(){ctx.save();ctx.translate(player.x,player.y);ctx.rotate(player.a);ctx.fillStyle='rgba(0,0,0,.3)';ctx.beginPath();ctx.ellipse(0,7,12,7,0,0,Math.PI*2);ctx.fill();ctx.fillStyle='#203440';ctx.fillRect(-7,-3,14,13);ctx.fillStyle='#6be0c4';ctx.beginPath();ctx.arc(0,-5,7,0,Math.PI*2);ctx.fill();ctx.fillStyle='#f0c6a1';ctx.beginPath();ctx.arc(0,-10,4.7,0,Math.PI*2);ctx.fill();ctx.fillStyle='#f5d2ad';ctx.fillRect(-10,1,4,7);ctx.fillRect(6,1,4,7);ctx.restore();}
+ function drawTree(t){ctx.fillStyle='rgba(0,0,0,.22)';ctx.beginPath();ctx.ellipse(t.x+4,t.y+6,t.r*1.25,t.r*.8,0,0,Math.PI*2);ctx.fill();ctx.fillStyle=t.park?'#77583e':'#58634b';ctx.fillRect(t.x-2,t.y-2,4,10);ctx.fillStyle=t.park?'#438866':'#71865e';ctx.beginPath();ctx.arc(t.x,t.y-3,t.r,0,Math.PI*2);ctx.fill();ctx.fillStyle='rgba(181,228,151,.22)';ctx.beginPath();ctx.arc(t.x-t.r*.28,t.y-t.r*.4,t.r*.47,0,Math.PI*2);ctx.fill();}
+ function drawPedestrian(p,t){ctx.save();ctx.translate(p.x,p.y+Math.sin(t/180+p.phase)*1.5);ctx.fillStyle='rgba(0,0,0,.25)';ctx.beginPath();ctx.ellipse(1,5,6,3,0,0,Math.PI*2);ctx.fill();ctx.fillStyle=p.color;ctx.beginPath();ctx.roundRect(-4,-2,8,9,3);ctx.fill();ctx.fillStyle='#e7c4a4';ctx.beginPath();ctx.arc(0,-6,3.2,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#29343c';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(-2,6);ctx.lineTo(-3,9);ctx.moveTo(2,6);ctx.lineTo(3,9);ctx.stroke();ctx.restore();}
+ function drawWorld(){
+  ctx.fillStyle='#52634d';ctx.fillRect(0,0,W,H);
+  // city blocks and paved courtyards
+  for(let r=0;r<roadY.length-1;r++)for(let c=0;c<roadX.length-1;c++){
+   const x=roadX[c]+ROAD/2+8,y=roadY[r]+ROAD/2+8,w=roadX[c+1]-roadX[c]-ROAD-16,h=roadY[r+1]-roadY[r]-ROAD-16;
+   const park=(r===2&&c===4)||(r===0&&c===2);
+   ctx.fillStyle=park?'#436b50':'#8a8b7b';ctx.fillRect(x,y,w,h);
+   ctx.fillStyle=park?'#608764':'#a2a292';ctx.fillRect(x+5,y+5,w-10,h-10);
+   if(park){ctx.fillStyle='#c1b995';ctx.fillRect(x+w*.45,y+10,13,h-20);ctx.fillRect(x+10,y+h*.54,w-20,12);ctx.fillStyle='#355f49';ctx.fillRect(x+w*.15,y+h*.18,w*.7,6);}
+  }
+  // sidewalk bands and asphalt avenues
+  ctx.fillStyle='#aaa99a';roadX.forEach(x=>ctx.fillRect(x-ROAD/2-12,0,ROAD+24,H));roadY.forEach(y=>ctx.fillRect(0,y-ROAD/2-12,W,ROAD+24));
+  ctx.fillStyle='#28343c';roadX.forEach(x=>ctx.fillRect(x-ROAD/2,0,ROAD,H));roadY.forEach(y=>ctx.fillRect(0,y-ROAD/2,W,ROAD));
+  // lane separators and broken center stripes
+  ctx.strokeStyle='rgba(234,222,171,.55)';ctx.lineWidth=2;ctx.setLineDash([22,19]);
+  roadX.forEach(x=>{ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()});roadY.forEach(y=>{ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()});ctx.setLineDash([]);
+  // crosswalk bars at intersections
+  ctx.fillStyle='rgba(230,235,220,.52)';roadX.forEach(x=>roadY.forEach(y=>{for(let i=-3;i<=3;i++){ctx.fillRect(x-ROAD/2+5,y+i*9-2,18,4);ctx.fillRect(x+i*9-2,y-ROAD/2+5,4,18)}}));
+  // painted curb strips
+  ctx.strokeStyle='rgba(235,233,208,.16)';ctx.lineWidth=2;roadX.forEach(x=>{ctx.beginPath();ctx.moveTo(x-ROAD/2-8,0);ctx.lineTo(x-ROAD/2-8,H);ctx.moveTo(x+ROAD/2+8,0);ctx.lineTo(x+ROAD/2+8,H);ctx.stroke()});
+  // buildings with roof details and tiny lit windows
+  for(const b of buildings){
+   ctx.fillStyle='rgba(0,0,0,.28)';ctx.fillRect(b.x+9,b.y+12,b.w,b.h);
+   ctx.fillStyle=b.color;ctx.fillRect(b.x,b.y,b.w,b.h);
+   ctx.fillStyle='rgba(220,233,236,.12)';ctx.fillRect(b.x+5,b.y+5,b.w-10,Math.max(7,b.h*.10));
+   ctx.fillStyle='rgba(14,24,34,.22)';ctx.fillRect(b.x+8,b.y+b.h*.52,b.w-16,3);
+   const cols=Math.max(2,Math.floor(b.w/39)),rows=Math.max(2,Math.floor(b.h/38));
+   for(let iy=0;iy<rows;iy++)for(let ix=0;ix<cols;ix++){const wx=b.x+15+ix*((b.w-30)/cols),wy=b.y+22+iy*((b.h-45)/rows);ctx.fillStyle=((ix*3+iy*5+Math.floor(b.x))%4===0)?'rgba(255,211,132,.72)':'rgba(144,206,218,.28)';ctx.fillRect(wx,wy,8,5);}
+   if(b.name){ctx.fillStyle='#a5efe0';ctx.fillRect(b.x+b.w*.12,b.y+b.h*.46,b.w*.76,18);ctx.fillStyle='#16313a';ctx.font='bold 10px sans-serif';ctx.textAlign='center';ctx.fillText(b.name,b.x+b.w*.5,b.y+b.h*.46+12)}
+  }
+  trees.forEach(drawTree);
+  // street lamps are tiny warm pools along the avenues
+  ctx.fillStyle='rgba(255,213,147,.42)';for(let i=0;i<roadX.length;i++)for(let j=0;j<roadY.length;j++){const x=roadX[i]+(i%2?66:-66),y=roadY[j]+(j%2?68:-68);ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);ctx.fill()}
+ }
+ function drawMarker(x,y,color,label){const pulse=5+Math.sin(performance.now()/220)*3;ctx.save();ctx.strokeStyle=color;ctx.lineWidth=3;ctx.globalAlpha=.88;ctx.beginPath();ctx.arc(x,y,25+pulse,0,Math.PI*2);ctx.stroke();ctx.fillStyle=color;ctx.globalAlpha=.18;ctx.beginPath();ctx.arc(x,y,19,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;ctx.font='bold 11px sans-serif';ctx.textAlign='center';ctx.fillStyle='#fff';ctx.fillText(label,x,y-37);ctx.restore();}
+ function drawMini(){const mw=map.width,mh=map.height;mctx.fillStyle='#14222a';mctx.fillRect(0,0,mw,mh);mctx.strokeStyle='#687a80';mctx.lineWidth=4;roadX.forEach(x=>{mctx.beginPath();mctx.moveTo(x/W*mw,0);mctx.lineTo(x/W*mw,mh);mctx.stroke()});roadY.forEach(y=>{mctx.beginPath();mctx.moveTo(0,y/H*mh);mctx.lineTo(mw,y/H*mh);mctx.stroke()});mctx.fillStyle='#568f6e';mctx.fillRect(roadX[4]/W*mw,roadY[2]/H*mh, (roadX[5]-roadX[4])/W*mw,(roadY[3]-roadY[2])/H*mh);const o=objective();mctx.fillStyle=jobPhase==='start'?'#9df276':'#f18ab6';mctx.beginPath();mctx.arc(o[0]/W*mw,o[1]/H*mh,4,0,Math.PI*2);mctx.fill();cars.slice(0,40).forEach(c=>{if(c.parked){mctx.fillStyle='#b9c9d1';mctx.fillRect(c.x/W*mw-1,c.y/H*mh-1,2,2)}});police.forEach(p=>{mctx.fillStyle='#ff6478';mctx.fillRect(p.x/W*mw-2,p.y/H*mh-2,4,4)});mctx.fillStyle='#fff';mctx.beginPath();mctx.arc(player.x/W*mw,player.y/H*mh,4,0,Math.PI*2);mctx.fill();mctx.strokeStyle='#c5f36b';mctx.lineWidth=1;mctx.stroke();}
+ function frame(t){
+  raf=requestAnimationFrame(frame);if(paused)return;
+  const dt=Math.min(.034,(t-last||16)/1000);last=t;
+  const forward=(key.w||key.arrowup?1:0)-(key.s||key.arrowdown?1:0),turn=(key.d||key.arrowright?1:0)-(key.a||key.arrowleft?1:0),boost=!!key.shift,brake=!!key.space;
+  if(vehicle){
+   vehicle.a+=turn*(Math.abs(vehicle.speed)>.12?.047:0)*Math.sign(vehicle.speed||1);
+   if(forward>0)vehicle.speed+= (boost?14:8.2)*dt;
+   if(forward<0)vehicle.speed-=9.5*dt;
+   vehicle.speed*=Math.pow(brake?.90:.986,dt*60);
+   vehicle.speed=clamp(vehicle.speed,boost?-1.9:-2.8,boost?7.3:5.3);
+   const ox=vehicle.x,oy=vehicle.y;vehicle.x+=Math.cos(vehicle.a)*vehicle.speed*dt*60;vehicle.y+=Math.sin(vehicle.a)*vehicle.speed*dt*60;
+   if(pointBlocked(vehicle.x,vehicle.y,17)){vehicle.x=ox;vehicle.y=oy;vehicle.speed*=-.29;vehicle.health=Math.max(0,vehicle.health-Math.abs(vehicle.speed)*1.3);if(vehicle.health<1){say('Your ride gave up. Time to walk.');player.x=vehicle.x+28;player.y=vehicle.y;vehicle.stolen=false;vehicle=null;}}
+   player.x=vehicle.x;player.y=vehicle.y;player.a=vehicle.a;
+   if(Math.abs(vehicle.speed)>5.6&&Math.random()<.018){setWanted(Math.max(1,wanted));}
+  }else{
+   let dx=(key.d||key.arrowright?1:0)-(key.a||key.arrowleft?1:0),dy=(key.s||key.arrowdown?1:0)-(key.w||key.arrowup?1:0);
+   if(dx||dy){const l=Math.hypot(dx,dy);dx/=l;dy/=l;player.a=Math.atan2(dy,dx);const speed=key.shift?4.25:2.85;const nx=player.x+dx*speed*dt*60,ny=player.y+dy*speed*dt*60;if(!pointBlocked(nx,player.y,11))player.x=nx;if(!pointBlocked(player.x,ny,11))player.y=ny;}
+  }
+  // traffic rolls slowly along the avenues
+  traffic.forEach(c=>{if(c.axis==='x'){c.x+=c.dir*c.speed*dt*60;if(c.x<-60)c.x=W+60;if(c.x>W+60)c.x=-60;}else{c.y+=c.dir*c.speed*dt*60;if(c.y<-60)c.y=H+60;if(c.y>H+60)c.y=-60;}});
+  pedestrians.forEach(p=>{if(p.axis==='x'){p.x+=p.dir*p.speed*dt*60;if(p.x<-20)p.x=W+20;if(p.x>W+20)p.x=-20;}else{p.y+=p.dir*p.speed*dt*60;if(p.y<-20)p.y=H+20;if(p.y>H+20)p.y=-20;}});
+  // police pursuit; they turn toward the player but buildings still block them
+  for(let i=police.length-1;i>=0;i--){const p=police[i],want=Math.atan2(player.y-p.y,player.x-p.x);let diff=((want-p.a+Math.PI*3)%(Math.PI*2))-Math.PI;p.a+=clamp(diff,-.055,.055);p.speed=2.1+wanted*.52;const px=p.x,py=p.y;p.x+=Math.cos(p.a)*p.speed*dt*60;p.y+=Math.sin(p.a)*p.speed*dt*60;if(pointBlocked(p.x,p.y,17)){p.x=px;p.y=py;p.a+=Math.PI*.56;}if(Math.hypot(player.x-p.x,player.y-p.y)<38){health=Math.max(0,health-.09);if(vehicle){vehicle.speed*=.965;vehicle.health=Math.max(0,vehicle.health-.015)}if(health<=0){health=100;cash=Math.max(0,cash-150);wanted=0;police.length=0;vehicle=null;player.x=roadX[3];player.y=roadY[2]+70;save();say('BUSTED! $150 bail. You are back downtown.',4000);}}}
+  if(wanted&&t-lastPoliceSpawn>5200){spawnPolice();lastPoliceSpawn=t;}
+  if(wanted){const nearby=police.some(p=>Math.hypot(p.x-player.x,p.y-player.y)<270);if(!nearby&&t-crimeAt>13000){heatTimer+=dt;if(heatTimer>4){wanted=Math.max(0,wanted-1);heatTimer=0;police.splice(0,police.length);say(wanted?'You lost one star. Keep out of sight.':'You lost the heat.');}}else heatTimer=0;}
+  // collect hidden cash bundles
+  cashDrops.forEach(d=>{if(d.active&&Math.hypot(d.x-player.x,d.y-player.y)<24){d.active=false;cash+=d.value;save();say('Pocket change found. +$'+d.value);}});
+  const o=objective();if(Math.hypot(o[0]-player.x,o[1]-player.y)<78){$('#ndLocation').textContent=jobPhase==='start'?'CONTACT NEARBY':'DROP POINT NEARBY'}else if(Math.hypot(garage.x-player.x,garage.y-player.y)<95){$('#ndLocation').textContent='AUTO SHOP'}else{$('#ndLocation').textContent=player.x<W*.35?'WEST END':player.x>W*.68?'EASTSIDE':player.y<H*.34?'UPTOWN':player.y>H*.68?'WATERFRONT':'DOWNTOWN'}
+  updateHud();
+  const camX=clamp(player.x-CW/2,0,W-CW),camY=clamp(player.y-CH/2,0,H-CH);
+  ctx.clearRect(0,0,CW,CH);ctx.save();ctx.translate(-camX,-camY);drawWorld();
+  const j=objective();drawMarker(j[0],j[1],jobPhase==='start'?'#aaf17d':'#fa91bc',jobPhase==='start'?'JOB':'DROP');drawMarker(garage.x,garage.y,'#78cbff','GARAGE');
+  cashDrops.forEach(d=>{if(d.active){ctx.save();ctx.translate(d.x,d.y);ctx.rotate(Math.PI/4);ctx.fillStyle='#f7d56d';ctx.fillRect(-6,-6,12,12);ctx.restore()}});
+  pedestrians.forEach(p=>drawPedestrian(p,t));traffic.forEach(c=>drawCar(c,false,true));cars.forEach(c=>drawCar(c));police.forEach(p=>drawCar(p,true));if(!vehicle)drawPlayer();
+  // night tint and a soft player headlight cone
+  ctx.fillStyle='rgba(7,13,35,.18)';ctx.fillRect(camX,camY,CW,CH);if(vehicle){const gx=vehicle.x+Math.cos(vehicle.a)*115,gy=vehicle.y+Math.sin(vehicle.a)*115;const grad=ctx.createRadialGradient(gx,gy,5,gx,gy,160);grad.addColorStop(0,'rgba(255,232,174,.14)');grad.addColorStop(1,'rgba(255,232,174,0)');ctx.fillStyle=grad;ctx.fillRect(camX,camY,CW,CH);}
+  ctx.restore();drawMini();
+  if(t<toastUntil){ctx.save();ctx.fillStyle='rgba(5,13,21,.78)';ctx.strokeStyle='rgba(173,242,216,.45)';ctx.beginPath();ctx.roundRect(CW/2-190,CH*.23,380,46,12);ctx.fill();ctx.stroke();ctx.fillStyle='#eefcf8';ctx.font='bold 14px sans-serif';ctx.textAlign='center';ctx.fillText(toastText,CW/2,CH*.23+28);ctx.restore();}
+ }
+ function pause(){paused=!paused;$('#ndShell').classList.toggle('paused',paused);$('#ndPauseButton').textContent=paused?'▶ Resume':'Ⅱ Pause';}
+ listen(window,'keydown',e=>{const k=e.key===' '?'space':e.key.toLowerCase();if(['arrowup','arrowdown','arrowleft','arrowright','space','shift'].includes(k)||['w','a','s','d','e','p'].includes(k)){e.preventDefault();}if(!key[k]&&k==='e')interact();if(!key[k]&&k==='p')pause();key[k]=true;});
+ listen(window,'keyup',e=>{key[e.key===' '?'space':e.key.toLowerCase()]=false;});listen(window,'blur',()=>Object.keys(key).forEach(k=>key[k]=false));
+ stage.querySelectorAll('[data-nd-key]').forEach(btn=>{const k=btn.dataset.ndKey;const down=e=>{e.preventDefault();key[k]=true;btn.setPointerCapture?.(e.pointerId)};const up=e=>{e.preventDefault();key[k]=false};listen(btn,'pointerdown',down);listen(btn,'pointerup',up);listen(btn,'pointercancel',up);listen(btn,'lostpointercapture',up)});
+ stage.querySelector('[data-nd-action="interact"]').addEventListener('click',interact);
+ $('#ndPauseButton').onclick=pause;$('#ndResume').onclick=()=>{if(paused)pause()};
+ updateHud();say('Welcome to Kita City. Your story starts here.');last=performance.now();raf=requestAnimationFrame(frame);addCleanup(()=>cancelAnimationFrame(raf));mountMessage();
+}
+
 function initColorStudio(stage){
  stage.innerHTML='<p class="chill-intro">A blank page for doodles, tiny masterpieces, or happy accidents.</p><canvas id="drawCanvas" class="chill-canvas" width="900" height="500" aria-label="Free drawing canvas" style="background:#fff;cursor:crosshair"></canvas><div class="chill-tools"><div class="draw-palette" id="drawPalette"><button class="draw-color active" data-color="#27324a" style="background:#27324a" aria-label="Ink"></button><button class="draw-color" data-color="#f06b77" style="background:#f06b77" aria-label="Coral"></button><button class="draw-color" data-color="#f4bb5d" style="background:#f4bb5d" aria-label="Sunshine"></button><button class="draw-color" data-color="#70b98b" style="background:#70b98b" aria-label="Mint"></button><button class="draw-color" data-color="#6c9fe8" style="background:#6c9fe8" aria-label="Blue"></button><button class="draw-color" data-color="#b18be4" style="background:#b18be4" aria-label="Lavender"></button></div><label class="tool-label" for="brushSize">Brush</label><input id="brushSize" type="range" min="2" max="34" value="8"><button id="drawErase">Eraser</button><button id="drawClear" class="clear-btn">Clear canvas</button></div>';
  const c=$('#drawCanvas'),ctx=c.getContext('2d');let drawing=false,color='#27324a',size=8,erase=false,last=null;ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height);function point(e){const r=c.getBoundingClientRect();return{x:(e.clientX-r.left)*c.width/r.width,y:(e.clientY-r.top)*c.height/r.height}}listen(c,'pointerdown',e=>{drawing=true;last=point(e);c.setPointerCapture(e.pointerId)});listen(c,'pointermove',e=>{if(!drawing)return;const p=point(e);ctx.strokeStyle=erase?'#fff':color;ctx.lineWidth=size;ctx.lineCap='round';ctx.lineJoin='round';ctx.beginPath();ctx.moveTo(last.x,last.y);ctx.lineTo(p.x,p.y);ctx.stroke();last=p});listen(c,'pointerup',()=>{drawing=false;last=null});listen(c,'pointercancel',()=>{drawing=false;last=null});$('#drawPalette').querySelectorAll('button').forEach(b=>b.onclick=()=>{color=b.dataset.color;erase=false;$('#drawErase').classList.remove('active');$('#drawPalette').querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b))});$('#brushSize').oninput=e=>size=+e.target.value;$('#drawErase').onclick=()=>{erase=!erase;$('#drawErase').classList.toggle('active',erase)};$('#drawClear').onclick=()=>{ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height)};mountMessage();
@@ -333,7 +615,7 @@ function refreshFullscreenButton(){const b=$('#fullscreenBtn');if(!b)return;cons
 document.addEventListener('fullscreenchange',refreshFullscreenButton);$('#fullscreenBtn').onclick=toggleGameFullscreen;document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('#gameStage').classList.contains('soft-fullscreen')){e.preventDefault();$('#gameStage').classList.remove('soft-fullscreen');refreshFullscreenButton();return}if(e.key.toLowerCase()==='f'&&(currentGame||window.kitaCommunityActive)&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName)){e.preventDefault();toggleGameFullscreen()}});
 
 // Global navigation and app controls
-$('#searchInput').addEventListener('input',e=>{currentSearch=e.target.value.toLowerCase().trim();renderGames()});$('#exploreBtn').onclick=()=>$('#games').scrollIntoView({behavior:'smooth'});$('#randomBtn').onclick=()=>launchGame(GAMES[Math.floor(Math.random()*GAMES.length)].id);$('#shuffleBtn').onclick=()=>launchGame(GAMES[Math.floor(Math.random()*GAMES.length)].id);$('#backBtn').onclick=()=>{closeGameFullscreen();cleanupGame();$('#gameScreen').style.display='none';$('#homeScreen').style.display='block';currentGame=null;window.kitaCommunityActive=null;$('#favoriteCurrent').hidden=false;renderGames();window.scrollTo({top:0,behavior:'smooth'})};$('#restartBtn').onclick=()=>{if(window.kitaCommunityActive)window.kitaOpenCommunityGame(window.kitaCommunityActive);else if(currentGame)launchGame(currentGame.id)};$('#favoriteCurrent').onclick=()=>{if(currentGame)toggleFavorite(currentGame.id)};document.querySelectorAll('[data-nav-filter]').forEach(a=>a.addEventListener('click',()=>{currentFilter=a.dataset.navFilter==='Popular'?'Arcade':'Favorites';renderFilters();renderGames()}));$('#year').textContent=new Date().getFullYear();renderFilters();renderGames();
+$('#searchInput').addEventListener('input',e=>{currentSearch=e.target.value.toLowerCase().trim();renderGames()});$('#exploreBtn').onclick=()=>$('#games').scrollIntoView({behavior:'smooth'});$('#cityBtn').onclick=()=>launchGame('neondistrict');$('#randomBtn').onclick=()=>launchGame(GAMES[Math.floor(Math.random()*GAMES.length)].id);$('#shuffleBtn').onclick=()=>launchGame(GAMES[Math.floor(Math.random()*GAMES.length)].id);$('#backBtn').onclick=()=>{closeGameFullscreen();cleanupGame();$('#gameScreen').style.display='none';$('#gameScreen').classList.remove('openworld-layout');$('#homeScreen').style.display='block';currentGame=null;window.kitaCommunityActive=null;$('#favoriteCurrent').hidden=false;const url=new URL(window.location.href);url.searchParams.delete('play');history.replaceState(null,'',url);renderGames();window.scrollTo({top:0,behavior:'smooth'})};$('#restartBtn').onclick=()=>{if(window.kitaCommunityActive)window.kitaOpenCommunityGame(window.kitaCommunityActive);else if(currentGame)launchGame(currentGame.id)};$('#favoriteCurrent').onclick=()=>{if(currentGame)toggleFavorite(currentGame.id)};document.querySelectorAll('[data-nav-filter]').forEach(a=>a.addEventListener('click',()=>{currentFilter=a.dataset.navFilter==='Popular'?'Arcade':'Favorites';renderFilters();renderGames()}));$('#year').textContent=new Date().getFullYear();renderFilters();renderGames();
 
 window.kitaLocalSnapshot=()=>({favorites:[...favorites],bests:Object.fromEntries(GAMES.map(g=>[g.id,bestFor(g.id)]).filter(([,v])=>v>0)),playedCount});
 window.kitaMergeCloudData=data=>{const cloudFavorites=Array.isArray(data?.favorites)?data.favorites:[];favorites=new Set([...favorites,...cloudFavorites]);localStorage.setItem('kitagames-favorites',JSON.stringify([...favorites]));if(data?.bests&&typeof data.bests==='object'){Object.entries(data.bests).forEach(([id,value])=>{if(GAMES.some(g=>g.id===id)&&Number(value)>bestFor(id))localStorage.setItem(BEST_PREFIX+id,String(Number(value)))})}playedCount=Math.max(playedCount,Number(data?.playedCount)||0);localStorage.setItem('kitagames-played',String(playedCount));renderGames();};
@@ -344,7 +626,7 @@ window.addEventListener('kitagames:datachanged',()=>{if(window.kitaCloudSave)win
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js';
 import { getAuth, GoogleAuthProvider, EmailAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInAnonymously, signInWithPopup, linkWithPopup, linkWithCredential, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js';
-import { getFirestore, doc, getDoc, setDoc, serverTimestamp, collection, collectionGroup, getDocs, query, where, limit, deleteDoc } from 'https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js';
+import { getFirestore, doc, getDoc, setDoc, serverTimestamp, collection, query, where, limit, deleteDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyB7ebSRhIvg3V2VErvHY3UwNy2N4KFbjug',
@@ -387,6 +669,7 @@ const COMMUNITY_SLOTS=['game-1','game-2','game-3'];
 const MAX_GAME_CHARS=80000;
 let myCommunityGames=new Map();
 let publicCommunityGames=[];
+let publicCommunityUnsubscribe=null;
 let editingCommunitySlot=null;
 const makerOverlay=$('makerOverlay');
 const COMMUNITY_STARTER = `<!doctype html>
@@ -428,7 +711,7 @@ function communityCard(game,isMine=false){
  const info=document.createElement('div');info.className='card-info';const title=document.createElement('div');title.className='card-title';title.textContent=game.title||'Untitled game';const desc=document.createElement('p');desc.className='card-desc';desc.textContent=game.description||'A game made by a KitaGames player.';const meta=document.createElement('div');meta.className='card-meta';const creator=document.createElement('span');creator.textContent=isMine?'Your game':'by '+(game.ownerName||'Kita creator');const state=document.createElement('span');state.textContent=isMine?(game.published?'Public':'Only you'):'HTML game';meta.append(creator,state);info.append(title,desc,meta);article.append(art,info);
  const actions=document.createElement('div');actions.className='community-card-actions';
  if(isMine){const edit=document.createElement('button');edit.className='primary';edit.textContent='Edit';edit.addEventListener('click',()=>openMaker(game));const del=document.createElement('button');del.className='danger';del.textContent='Delete';del.addEventListener('click',()=>removeCommunityGame(game.slot));actions.append(edit,del)}
- else {const play=document.createElement('button');play.className='primary';play.textContent='▶ Play';play.addEventListener('click',()=>window.kitaOpenCommunityGame(game));actions.append(play)}
+ if(game.published){const play=document.createElement('button');play.className='primary';play.textContent='▶ Play';play.addEventListener('click',()=>window.kitaOpenCommunityGame(game));actions.append(play);const share=document.createElement('button');share.textContent='↗ Share';share.title='Copy a link that opens this game for anyone';share.addEventListener('click',()=>shareCommunityGame(game));actions.append(share)}
  article.append(actions);return article;
 }
 function renderMyCommunityGames(){
@@ -445,18 +728,69 @@ function renderPublicCommunityGames(){
  if(!publicCommunityGames.length){addEmptyCommunityMessage(root,'No community games yet','Be the first to publish a game. Player-made games will show up here.');return}
  publicCommunityGames.forEach(game=>root.appendChild(communityCard(game,false)));
 }
+function communityDocId(uid,slot){return `${uid}__${slot}`;}
 async function loadMyCommunityGames(){
  const user=auth.currentUser;myCommunityGames=new Map();
- if(user){const snap=await getDocs(collection(db,'users',user.uid,'communityGames'));snap.forEach(d=>myCommunityGames.set(d.id,{...d.data(),slot:d.id}));}
+ if(user){
+  // Migrate older releases' nested documents into the top-level collection.
+  // This is a one-time, owner-only copy; it lets the public library use a
+  // normal collection query and removes the collection-group index requirement.
+  for(const slot of COMMUNITY_SLOTS){
+   const ref=doc(db,'communityGames',communityDocId(user.uid,slot));
+   const legacyRef=doc(db,'users',user.uid,'communityGames',slot);
+   const old=await getDoc(legacyRef);
+   let snap=await getDoc(ref);
+   if(!snap.exists()&&old.exists()){
+    const oldData=old.data();
+    await setDoc(ref,{...oldData,ownerUid:user.uid,createdAt:serverTimestamp(),updatedAt:serverTimestamp()});
+    snap=await getDoc(ref);
+   }
+   if(snap.exists())myCommunityGames.set(slot,{...snap.data(),slot});
+   if(old.exists())await deleteDoc(legacyRef);
+  }
+ }
  renderMyCommunityGames();
 }
-async function loadPublicCommunityGames(){
+function sortCommunityGames(){publicCommunityGames.sort((a,b)=>{const at=a.publishedAt?.toMillis?.()||0,bt=b.publishedAt?.toMillis?.()||0;return bt-at});}
+function subscribePublicCommunityGames(){
+ if(publicCommunityUnsubscribe)return;
+ // Top-level collection + a single-field equality filter. Firestore's default
+ // collection-scoped index handles this; no collection-group index is needed.
+ const q=query(collection(db,'communityGames'),where('published','==',true),limit(100));
+ publicCommunityUnsubscribe=onSnapshot(q,snap=>{
+  publicCommunityGames=snap.docs.map(d=>{const data=d.data();const prefix=(data.ownerUid||'')+'__';return {...data,slot:d.id.startsWith(prefix)?d.id.slice(prefix.length):'',docPath:d.ref.path}}).filter(g=>COMMUNITY_SLOTS.includes(g.slot));
+  sortCommunityGames();renderPublicCommunityGames();
+  communityStatus(publicCommunityGames.length?`${publicCommunityGames.length} public game${publicCommunityGames.length===1?'':'s'} in the community.`:'No published community games yet.');
+ },err=>{
+  console.error('Community library:',err);renderPublicCommunityGames();
+  communityStatus(err.code==='permission-denied'?'Publish the updated FIRESTORE_RULES.txt rules to enable public community games.':err.code==='failed-precondition'?'An older cached build may still be running. Replace index.html with the latest release and hard-refresh; this version uses no collection-group query.':'Could not load community games. Check your Firestore setup and connection.',true);
+ });
+}
+function communityGameUrl(game){
+ const url=new URL(window.location.href);url.search='';url.hash='';url.searchParams.set('play',`${game.ownerUid}/${game.slot}`);return url.toString();
+}
+async function shareCommunityGame(game){
+ const url=communityGameUrl(game);
  try{
-  const q=query(collectionGroup(db,'communityGames'),where('published','==',true),limit(100));
-  const snap=await getDocs(q);publicCommunityGames=snap.docs.map(d=>({...d.data(),slot:d.id,docPath:d.ref.path}));
-  publicCommunityGames.sort((a,b)=>{const at=a.publishedAt?.toMillis?.()||0,bt=b.publishedAt?.toMillis?.()||0;return bt-at});
-  renderPublicCommunityGames();communityStatus(publicCommunityGames.length?`${publicCommunityGames.length} public game${publicCommunityGames.length===1?'':'s'} in the community.`:'No published community games yet.');
- }catch(err){console.error('Community library:',err);renderPublicCommunityGames();communityStatus(err.code==='permission-denied'?'Publish the updated FIRESTORE_RULES.txt in Firebase Console to enable community games.':(err.code==='failed-precondition'?'Firestore needs the communityGames collection-group index. See FIRESTORE_INDEXES.txt or use the index link in the browser console.':'Could not load community games. Check your Firestore setup and try again.'),true)}
+  if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);communityStatus('Share link copied! Anyone can open this link and play the published game.');}
+  else{window.prompt('Copy this link to share the game:',url);communityStatus('This is a permanent link to the published game.');}
+ }catch(err){window.prompt('Copy this link to share the game:',url);}
+}
+async function openSharedCommunityGame(){
+ const shared=new URLSearchParams(window.location.search).get('play');if(!shared)return;
+ const [ownerUid,slot,...extra]=shared.split('/');
+ if(!ownerUid||ownerUid.length>128||extra.length||!COMMUNITY_SLOTS.includes(slot)){
+  communityStatus('That community game link is not valid.',true);return;
+ }
+ communityStatus('Opening the shared game from Firestore…');
+ try{
+  const ref=doc(db,'communityGames',communityDocId(ownerUid,slot));const snap=await getDoc(ref);
+  if(!snap.exists()||snap.data().published!==true){communityStatus('This game is private, deleted, or no longer published.',true);return;}
+  const game={...snap.data(),slot,docPath:ref.path};window.kitaOpenCommunityGame(game);
+ }catch(err){
+  console.error('Open shared community game:',err);
+  communityStatus(err.code==='permission-denied'?'This game is not public. Check that the latest Firestore public-read rules are published.':'Could not open this game. Check your connection and Firestore setup.',true);
+ }
 }
 function validateGameForm(){
  const title=$('makerGameTitle').value.trim(),description=$('makerGameDescription').value.trim(),code=$('makerGameCode').value;
@@ -486,19 +820,21 @@ $('makerSave').addEventListener('click',async()=>{
  const existing=myCommunityGames.get(slot);const published=$('makerPublish').checked;
  const payload={title:values.title,description:values.description,code:values.code,published,ownerUid:user.uid,ownerName:(user.displayName||'Kita creator').slice(0,60),createdAt:existing?.createdAt||serverTimestamp(),updatedAt:serverTimestamp(),publishedAt:published?(existing?.published&&existing.publishedAt?existing.publishedAt:serverTimestamp()):null};
  const save=$('makerSave');save.disabled=true;makerStatus('Saving your game to Firestore…');
- try{await setDoc(doc(db,'users',user.uid,'communityGames',slot),payload);await loadMyCommunityGames();await loadPublicCommunityGames();editingCommunitySlot=slot;$('makerDelete').hidden=false;makerStatus(published?'Saved and published! Your game is now in the community library.':'Saved as a private draft. Only you can see it.');}
+ try{await setDoc(doc(db,'communityGames',communityDocId(user.uid,slot)),payload);await loadMyCommunityGames();editingCommunitySlot=slot;$('makerDelete').hidden=false;makerStatus(published?'Saved and published! Your game is now in the community library.':'Saved as a private draft. Only you can see it.');}
  catch(err){console.error('Save community game:',err);makerStatus(err.code==='permission-denied'?'Firestore blocked the save. Publish the latest FIRESTORE_RULES.txt rules and make sure you are signed in with Google or email.':(err.message||'Could not save your game.'),true)}
  finally{save.disabled=false}
 });
 async function removeCommunityGame(slot){
  const user=auth.currentUser;if(!makerCanPublish()||!COMMUNITY_SLOTS.includes(slot))return;
  if(!confirm('Delete this game from your account? This frees one of your three slots.'))return;
- try{await deleteDoc(doc(db,'users',user.uid,'communityGames',slot));if(editingCommunitySlot===slot)closeMaker();await loadMyCommunityGames();await loadPublicCommunityGames();communityStatus('Game deleted. One creator slot is free again.');}
+ try{await deleteDoc(doc(db,'communityGames',communityDocId(user.uid,slot)));if(editingCommunitySlot===slot)closeMaker();await loadMyCommunityGames();communityStatus('Game deleted. One creator slot is free again.');}
  catch(err){communityStatus(err.message||'Could not delete that game.',true)}
 }
 $('makerDelete').addEventListener('click',()=>{if(editingCommunitySlot)removeCommunityGame(editingCommunitySlot)});
-// Load the public shelf for everyone; private slots load only for the signed-in owner.
-loadPublicCommunityGames().catch(console.error);
+// Load the public shelf for everyone. Firestore keeps it in sync live,
+// and the same published records are fetched again on every page refresh.
+subscribePublicCommunityGames();
+openSharedCommunityGame();
 
 onAuthStateChanged(auth,async user=>{cloudReady=false;syncAccountPane();try{await loadMyCommunityGames()}catch(err){console.warn('Your community games could not load:',err);communityStatus('Your private creator slots could not load. Check the latest Firestore rules.',true)}if(user){$('cloudStatus').textContent='Connecting your private save…';await hydrateProfile(user);syncAccountPane();}else{syncAccountPane()}});
 

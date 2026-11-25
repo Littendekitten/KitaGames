@@ -50,3 +50,32 @@ DATA AND STORAGE
 - Firestore Security Rules, not a browser-only counter, enforce slot ownership
   and the three-game maximum.
 - The site has no separate server or custom backend.
+
+
+PUBLIC LIBRARY, PERSISTENCE AND SHARING
+--------------------------------------
+- Published games are stored in the top-level Firestore collection as:
+  communityGames/{uid}__game-1, communityGames/{uid}__game-2 or
+  communityGames/{uid}__game-3.
+- The Discover page queries the top-level communityGames collection where
+  published == true. This reloads from Firestore after refresh and uses the
+  normal collection-scoped single-field index (no collection-group index).
+- The public shelf also uses a Firestore realtime listener. New publications,
+  edits, unpublishing and deletions appear for visitors while the site is open.
+- Each published game has a Share button. It copies a permanent KitaGames URL
+  containing the creator UID and fixed game slot, for example:
+      https://YOUR-USERNAME.github.io/kitagames/?play=FIREBASE_UID/game-1
+  Anyone opening that URL can load the public Firestore document and play it.
+  Refreshing the shared URL opens the same game again.
+- The direct link reads only one game document and verifies published == true.
+  Private drafts cannot be opened by other users, even if they guess the URL.
+- If a creator unpublishes or deletes a game, its public card disappears and
+  its old shared URL stops opening the game.
+- Firestore's public collection query and direct document reads require the
+  public read rules in FIRESTORE_RULES.txt. The public listing is limited to
+  100 games per query in this build.
+- Share URLs contain the Firebase Auth UID and slot identifier, not the
+  creator's email address or private HTML draft content.
+
+- Older nested creator documents are copied to the top-level collection when
+  their owner first signs in on the updated build, then the legacy copy is deleted.

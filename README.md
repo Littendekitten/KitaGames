@@ -1,6 +1,6 @@
 # KitaGames
 
-A fully static browser-game site with 26 activities, real cover artwork, fullscreen play, Google/email/guest sign-in, and private cloud saves through Firebase Authentication + Cloud Firestore.
+A fully static browser-game site with 27 activities, real cover artwork, fullscreen play, Google/email/guest sign-in, and private cloud saves through Firebase Authentication + Cloud Firestore.
 
 ## What is included
 
@@ -37,11 +37,12 @@ Add your GitHub Pages host (for example `yourname.github.io`) to Authentication 
 
 ## Text guides
 
-- `RULES.txt` — full instructions and rules for all 26 games/activities.
+- `RULES.txt` — full instructions and rules for all 27 games/activities.
+- `NEON_DISTRICT_RULES.txt` — detailed controls, jobs, vehicles and wanted-level guide for Neon District.
 - `FIREBASE_SETUP.txt` — click-by-click Firebase and GitHub Pages setup.
 - `FIRESTORE_RULES.txt` — complete Firestore Security Rules to paste into Firebase.
 - `COMMUNITY_GAME_RULES.txt` — account limits, upload format, safety and publishing rules for player-made games.
-- `FIRESTORE_INDEXES.txt` — collection-group index setup if Firebase requests it.
+- `FIRESTORE_INDEXES.txt` — explains why the latest public library needs no custom index.
 
 ## Technical notes
 
@@ -67,4 +68,37 @@ and played inside an isolated iframe with a restrictive Content Security
 Policy. Publish the updated `FIRESTORE_RULES.txt` in the Firebase Console
 before using the community creator.
 
-See `FIREBASE_SETUP.txt` for no-command Firebase setup, `COMMUNITY_GAME_RULES.txt` for uploader rules, and `FIRESTORE_INDEXES.txt` if the Community query asks for a Firestore index. Firestore usage is still subject to Google Firebase quotas and pricing for reads, writes, stored data and network transfer; a no-server design does not mean unlimited or necessarily free usage.
+See `FIREBASE_SETUP.txt` for no-command Firebase setup, `COMMUNITY_GAME_RULES.txt` for uploader rules, and `FIRESTORE_INDEXES.txt` for the index-free community query design. Firestore usage is still subject to Google Firebase quotas and pricing for reads, writes, stored data and network transfer; a no-server design does not mean unlimited or necessarily free usage.
+
+
+## Community publishing and share links
+
+Published player games are stored in Firestore and loaded from the top-level
+`communityGames` collection query on every page load. A Firestore realtime
+listener also keeps the public shelf updated while the site is open. Each
+published game has a Share action that copies a direct GitHub Pages URL such as
+`https://YOUR-USERNAME.github.io/kitagames/?play=FIREBASE_UID/game-1`.
+Opening or refreshing that URL fetches the published game directly from
+Firestore and launches it. Private drafts are not publicly readable. The three
+fixed game slots and public read restrictions are enforced by the rules in
+`FIRESTORE_RULES.txt`.
+
+
+## Neon District: Open City
+
+An original top-down open-city sandbox is included as a built-in game. Explore
+the city on foot or in a driveable car, take delivery jobs, find cash stashes,
+visit the garage, and try to lose the police when your wanted level rises. It
+uses Canvas 2D and procedural art, runs entirely in the browser, and supports
+keyboard controls plus touch controls on phones. Progress cash and completed
+jobs are stored locally in the browser.
+
+## Community games — no custom collection-group index
+
+This release moves player-created games to a top-level Firestore collection
+`/communityGames/{uid}__game-1` through `__game-3`. The public shelf uses a
+regular collection query, so the collection-group index warning is removed.
+The three fixed document IDs still enforce the three-game-per-account limit
+in Firestore Security Rules. Existing nested creator documents are migrated
+when their owner signs in after the updated rules are published. Publish the
+new `FIRESTORE_RULES.txt` before using this release.

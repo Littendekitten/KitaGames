@@ -39,12 +39,14 @@ required.
    and enforce exactly three reusable game slots per account. Do not replace
    them with public read/write rules.
 
-5) CREATE THE COMMUNITY QUERY INDEX (IF FIRESTORE ASKS FOR IT)
---------------------------------------------------------------
-The public Community shelf uses a Firestore collection-group query on
-communityGames, filtered by published == true. If the browser displays a
-Firestore "requires an index" error, use the link in that error or follow
-FIRESTORE_INDEXES.txt to add the single-field collection-group index.
+5) COMMUNITY LIBRARY INDEX
+--------------------------
+The current website uses a top-level /communityGames collection and a normal
+collection query filtered by published == true. Firestore's default
+collection-scoped single-field index handles this automatically, so no custom
+collection-group index, composite index, or manual index creation is required.
+See FIRESTORE_INDEXES.txt if an older browser build still displays the old
+collection-group index message.
 
 6) USE THE COMMUNITY CREATOR
 ----------------------------
@@ -106,3 +108,24 @@ IMPORTANT DETAILS
   to a permanent Google/email account before using the creator.
 - Analytics is not initialized in this build; the measurement ID remains in
   the Firebase config only.
+
+
+7) IF THE OLD COLLECTION-GROUP INDEX WARNING STILL APPEARS
+-----------------------------------------------------------
+The current index.html uses collection(db, 'communityGames') with only a
+where('published', '==', true) equality filter and limit(100). It does not use
+collectionGroup(). Firestore automatically maintains the normal collection-
+scoped single-field index needed for that query.
+
+1. Replace the old website files with every file from the newest ZIP.
+2. Publish the new FIRESTORE_RULES.txt in Firebase Console.
+3. Hard-refresh the website (Ctrl+Shift+R on Windows/Linux, Cmd+Shift+R on Mac),
+   or open it in a private/incognito window.
+4. Check the browser's loaded index.html source for the text
+   "collectionGroup". It should not be present.
+5. Confirm that the 'published' field has not been exempted from automatic
+   indexing for the top-level communityGames collection.
+
+Existing player-made games from the older nested layout are copied into the
+new top-level collection the next time their owner signs in. Publish the new
+rules before signing in so the migration can read and remove the legacy copy.
